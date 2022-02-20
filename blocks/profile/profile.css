@@ -2,6 +2,6 @@
   max-width: 880px;
   margin: auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  padding-bottom: 51px;
 }
