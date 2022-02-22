@@ -1,12 +1,15 @@
 .popup__item {
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   width: 358px;
-  margin: 0 auto;
+  margin: 0;
+  padding-top: 30px;
   padding-bottom: 13px;
   font-size: 14px;
   line-height: 17px;
+  outline: none;
+  box-sizing: border-box;
+
 }
-.popup__item:first-child{
-  margin-bottom: 30px;
-}
+
+
 

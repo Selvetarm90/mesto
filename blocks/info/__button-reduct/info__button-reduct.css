@@ -1,5 +1,7 @@
 .info__button-reduct{
 width: 24px;
 height: 24px;
-
+}
+.info__button-reduct:hover{
+    opacity: .3;
 }
