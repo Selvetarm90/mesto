@@ -5,3 +5,7 @@
   right: -40px;
   top: -40px;
 }
+.popup__button-close:hover{
+  opacity: .6;
+  transition: .3s;
+}

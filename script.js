@@ -13,26 +13,18 @@ function openOrCloseReduct(){
 
 reductButton.addEventListener('click', function(){
   popup = openOrCloseReduct();
-  popupItem[0].textContent = profileName.textContent;
-  popupItem[1].textContent = profileAbout.textContent;
-  console.log(popupItem[0].textContent);
-  console.log(profileName.textContent);
+  popupItem[0].value = profileName.textContent;
+  popupItem[1].value = profileAbout.textContent;
 });
 
 buttonCloseReduct.addEventListener('click', function(){
   popup = openOrCloseReduct();
-  console.log(popupItem[0].textContent);
-  console.log(profileName.textContent);
 });
-
-
 
 saveReduct.addEventListener('click', function(evt){
   evt.preventDefault();
-  profileName.textContent = popupItem[0].textContent;
-  profileAbout.textContent = popupItem[1].textContent;
+  profileName.textContent = popupItem[0].value;
+  profileAbout.textContent = popupItem[1].value;
   popup = openOrCloseReduct();
-  console.log(popupItem[0].textContent);
-  console.log(profileName.textContent);
 });
 

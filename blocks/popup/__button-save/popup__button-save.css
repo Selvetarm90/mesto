@@ -14,3 +14,7 @@
   align-items: center;
 
 }
+.popup__button-save:hover{
+  opacity: .8;
+  transition: .3s;
+}
