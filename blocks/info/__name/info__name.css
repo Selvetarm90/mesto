@@ -5,3 +5,20 @@
   font-size: 42px;
   line-height: 48px;
 }
+@media (max-width: 680px) {
+  .info__name{
+    margin-right: 8px;
+    margin-top: 26px;
+    margin-right: 10px;
+    font-size: 32px;
+  }
+}
+@media (max-width: 620px) {
+  .info__name{
+    padding-left: 18px;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 33px;
+    text-align: center;
+  }
+}

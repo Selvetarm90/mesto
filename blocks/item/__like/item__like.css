@@ -6,7 +6,7 @@
 }
 .item__like:hover{
   opacity: .5;
-  transition: .3s;
+  transition: opacity .3s;
 }
 .item__like:active{
   background-image: url(../../../images/like-black.svg);

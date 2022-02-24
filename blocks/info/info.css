@@ -1,7 +1,14 @@
 .info{
-flex-grow: 1;
-padding-left: 30px;
-display: flex;
-flex-wrap: wrap;
-align-items: baseline;
+  flex-grow: 1;
+  padding-left: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+@media (max-width: 620px) {
+  .info{
+    padding: 0;
+    justify-content: center;
+  }
 }

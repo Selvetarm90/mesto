@@ -1,8 +1,19 @@
 .cards{
   max-width: 880px;
-  margin: auto;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(auto-fill, 282px);
   gap: 17px;
-
+}
+@media (max-width: 920px) {
+  .cards{
+    width: 95%;
+  }
+}
+@media (max-width: 620px) {
+  .cards{
+    width: 282px;
+    grid-template-columns: repeat(1, 282px);
+    gap: 20px;
+  }
 }

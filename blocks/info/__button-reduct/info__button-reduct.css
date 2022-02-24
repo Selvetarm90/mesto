@@ -6,3 +6,10 @@
   opacity: .6;
   transition: .3s;
 }
+@media (max-width: 620px) {
+  .info__button-reduct{
+    width: 18px;
+    height: 18px;
+  }
+}
+

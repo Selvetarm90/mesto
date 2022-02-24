@@ -2,3 +2,15 @@
   width: 880px;
   margin: 67px auto 60px;
 }
+@media (max-width: 920px) {
+  .footer{
+    width: 95%;
+  }
+}
+@media (max-width: 400px) {
+  .footer{
+    width: 282px;
+    margin: 48px auto 36px;
+  }
+}
+
