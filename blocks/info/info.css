@@ -3,7 +3,8 @@
   padding-left: 30px;
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center; /*Сначала использовал baseline, но на Mozilla Firefox кнопка уползает слишком вниз */
+  
 }
 
 @media (max-width: 620px) {
