@@ -1,4 +1,4 @@
-.popup__item {
+.form-group__item {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-family: inherit;
@@ -11,12 +11,7 @@
   box-sizing: border-box;
 }
 @media (max-width: 620px) {
-  .popup__item{
+  .form-group__item{
     width: 238px;
-    font-size: 14px;
-    line-height: 17px;
   }
 }
-
-
-

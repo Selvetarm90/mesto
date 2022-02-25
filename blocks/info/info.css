@@ -9,6 +9,7 @@
 @media (max-width: 620px) {
   .info{
     padding: 0;
+    width: 282px;
     justify-content: center;
   }
 }

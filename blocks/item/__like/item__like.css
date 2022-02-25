@@ -1,12 +1,16 @@
 .item__like{
   background-image: url(../../../images/like.svg);
+  border: 0;
+  background-color: transparent;
+  padding: 0;
   margin-right: 20px;
   width: 22px;
   min-height: 19px;
+  transition: .3s;
 }
 .item__like:hover{
   opacity: .5;
-  transition: opacity .3s;
+  cursor: pointer;
 }
 .item__like:active{
   background-image: url(../../../images/like-black.svg);

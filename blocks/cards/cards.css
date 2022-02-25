@@ -5,9 +5,10 @@
   grid-template-columns: repeat(auto-fill, 282px);
   gap: 17px;
 }
-@media (max-width: 920px) {
+@media (max-width: 930px) {
   .cards{
-    width: 95%;
+    width: 581px;
+    grid-template-columns: repeat(2, 282px);
   }
 }
 @media (max-width: 620px) {

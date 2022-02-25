@@ -1,30 +1,30 @@
 let popup = document.querySelector(".popup");
 let reductButton = document.querySelector(".info__button-reduct");
-let popupItem = popup.querySelectorAll(".popup__item");
+let formName = document.querySelector(".form-group__item_el_name");
+let formJob = document.querySelector(".form-group__item_el_job");
 let profileName = document.querySelector(".info__name");
 let profileAbout = document.querySelector(".info__about");
-let saveReduct = popup.querySelector(".popup__button-save");
+let savedForm = document.querySelector(".form-group");
 let buttonCloseReduct = popup.querySelector(".popup__button-close");
 
 function openOrCloseReduct(){
   popup.classList.toggle("popup_opened");
-  return popup;
 }
 
-reductButton.addEventListener('click', function(){
-  popup = openOrCloseReduct();
-  popupItem[0].value = profileName.textContent;
-  popupItem[1].value = profileAbout.textContent;
-});
+function openReduct(){
+  openOrCloseReduct();
+  formName.value = profileName.textContent;
+  formJob.value = profileAbout.textContent;
+}
 
-buttonCloseReduct.addEventListener('click', function(){
-  popup = openOrCloseReduct();
-});
+reductButton.addEventListener('click', openReduct);
 
-saveReduct.addEventListener('click', function(evt){
+buttonCloseReduct.addEventListener('click', openOrCloseReduct);
+
+savedForm.addEventListener('submit', function(evt){
   evt.preventDefault();
-  profileName.textContent = popupItem[0].value;
-  profileAbout.textContent = popupItem[1].value;
-  popup = openOrCloseReduct();
+  profileName.textContent = formName.value;
+  profileAbout.textContent = formJob.value;
+  openOrCloseReduct();
 });
 

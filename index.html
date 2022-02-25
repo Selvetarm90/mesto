@@ -9,16 +9,6 @@
 
   <body class="body">
     <div class="page">
-      <div class="popup">
-        <form class="popup__container">
-          <h3 class="popup__heading">Редактировать профиль</h3>
-          <input type="text" class="popup__item">
-          <input type="text" class="popup__item">
-          <button type="submit" class="popup__button-save">Сохранить</button>
-          <img class="popup__button-close" alt="закрыть" src="./images/Close-Button.svg">
-        </form>
-      </div>
-
       <header class="header">
         <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Место-Россия">
       </header>
@@ -28,51 +18,63 @@
           <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
           <div class="info">
             <h1 class="info__name">Жак-Ив Кусто</h1>
-            <img class="info__button-reduct" src="./images/Button-redact.svg" alt="Редактировать">
+            <button type="button" aria-label="Редактировать" class="info__button-reduct"></button>
             <p class="info__about">Исследователь океана</p>
           </div>
-          <div class="profile__add-button"></div>
+          <button type="button" aria-label="Добавить" class="profile__add-button"></button>
         </section>
 
         <section class="cards">
-          <div class="item">
+          <article class="item">
             <img class="item__picture" src="./images/Karachaevsk.jpg" alt="Заброшеный храм">
             <h2 class="item__title"> Карачаевск</h2>
-            <div class="item__like"></div>
-          </div>
-          <div class="item">
+            <button type="button" aria-label="Оценить" class="item__like"></button>
+          </article>
+          <article class="item">
             <img class="item__picture" src="./images/Dagestan.jpg" alt="горы в Дагестане">
             <h2 class="item__title"> Дагестан</h2>
-            <div class="item__like"></div>
-          </div>
-          <div class="item">
+            <button type="button" aria-label="Оценить" class="item__like"></button>
+          </article>
+          <article class="item">
             <img class="item__picture" src="./images/dombay.jpg" alt="горы Домбая">
             <h2 class="item__title"> Домбай</h2>
-            <div class="item__like"></div>
-          </div>
-          <div class="item">
+            <button type="button" aria-label="Оценить" class="item__like"></button>
+          </article>
+          <article class="item">
             <img class="item__picture" src="./images/elbrus.jpg" alt="гора Эльбрус">
             <h2 class="item__title"> Эльбрус</h2>
-            <div class="item__like"></div>
-          </div>
-          <div class="item">
+            <button type="button" aria-label="Оценить" class="item__like"></button>
+          </article>
+          <article class="item">
             <img class="item__picture" src="./images/Kabardino-Balkariya.jpg" alt="Устье">
             <h2 class="item__title"> Кабардино-Балкария</h2>
-            <div class="item__like"></div>
-          </div>
-          <div class="item">
+            <button type="button" aria-label="Оценить" class="item__like"></button>
+          </article>
+          <article class="item">
             <img class="item__picture" src="./images/Kareliya.jpg" alt="Лес с высоты">
             <h2 class="item__title"> Карелия</h2>
-            <div class="item__like"></div>
-          </div>
+            <button type="button" aria-label="Оценить" class="item__like"></button>
+          </article>
         </section>
       </main>
 
       <footer class="footer">
         <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia</p>
       </footer>
+
+      <div class="popup">
+        <div class="popup__container">
+          <h3 class="popup__heading">Редактировать профиль</h3>
+          <form class="form-group" name="dateForm">
+            <input type="text" class="form-group__item form-group__item_el_name" name="firstname">
+            <input type="text" class="form-group__item form-group__item_el_job" name="job">
+            <button name="saved-form" type="submit" class="form-group__button-save">Сохранить</button>
+          </form>
+          <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
+        </div>
+      </div>
+
     </div>
     <script src="./script.js"></script>
   </body>
-
 </html>

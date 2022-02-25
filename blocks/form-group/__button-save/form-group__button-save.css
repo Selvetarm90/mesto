@@ -1,4 +1,4 @@
-.popup__button-save{
+.form-group__button-save{
   background-color: #000;
   color: #fff;
   width: 358px;
@@ -12,14 +12,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-}
-.popup__button-save:hover{
-  opacity: .8;
   transition: .3s;
 }
+.form-group__button-save:hover{
+  cursor: pointer;
+  opacity: .8;
+}
 @media (max-width: 620px) {
-  .popup__button-save{
+  .form-group__button-save{
     width: 238px;
     margin-top: 45px;
     font-size: 14px;

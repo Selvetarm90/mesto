@@ -1,15 +1,21 @@
 .info__button-reduct{
+  background-image: url(../../../images/Button-redact.svg);
+  border: 0;
+  background-color: transparent;
+  padding: 0;
   width: 24px;
   height: 24px;
+  transition: .3s;
 }
 .info__button-reduct:hover{
   opacity: .6;
-  transition: .3s;
+  cursor: pointer;
 }
 @media (max-width: 620px) {
   .info__button-reduct{
     width: 18px;
     height: 18px;
+    background-size: contain;
   }
 }
 
