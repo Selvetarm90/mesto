@@ -25,10 +25,11 @@
         </section>
 
         <section class="cards">
-          <article class="item">
+          <!--<article class="item">
             <img class="item__picture" src="./images/Karachaevsk.jpg" alt="Заброшеный храм">
             <h2 class="item__title"> Карачаевск</h2>
             <button type="button" aria-label="Оценить" class="item__like"></button>
+
           </article>
           <article class="item">
             <img class="item__picture" src="./images/Dagestan.jpg" alt="горы в Дагестане">
@@ -55,6 +56,7 @@
             <h2 class="item__title"> Карелия</h2>
             <button type="button" aria-label="Оценить" class="item__like"></button>
           </article>
+        -->
         </section>
       </main>
 
@@ -62,7 +64,7 @@
         <p class="footer__copyright">&copy;&nbsp;2022 Mesto Russia</p>
       </footer>
 
-      <div class="popup">
+      <div class="popup popup_button_reduct">
         <div class="popup__container">
           <h3 class="popup__heading">Редактировать профиль</h3>
           <form class="form-group" name="dateForm">
@@ -74,7 +76,27 @@
         </div>
       </div>
 
+      <div class="popup popup_button_add-item">
+        <div class="popup__container">
+          <h3 class="popup__heading">Новое место</h3>
+          <form class="form-group" name="date-form-add">
+            <input type="text" class="form-group__item form-group__item_el_image-title" name="image-title" placeholder="Название">
+            <input type="text" class="form-group__item form-group__item_el_image-link" name="image-link" placeholder="Ссылка на картинку">
+            <button name="saved-form" type="submit" class="form-group__button-save">Создать</button>
+          </form>
+          <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
+        </div>
+      </div>
+
     </div>
+    <template class="template-item">
+      <article class="item">
+        <img class="item__picture" src="" alt="Фото места в России">
+        <h2 class="item__title"> Карачаевск</h2>
+        <button type="button" aria-label="Оценить" class="item__like"></button>
+        <button type="button" aria-label="Удалить" class="item__delete"></button>
+      </article>
+    </template>
     <script src="./script.js"></script>
   </body>
 </html>
