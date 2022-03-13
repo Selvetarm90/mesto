@@ -23,9 +23,9 @@
 }
 @media (max-width: 620px) {
   .info__name{
-    max-width: 230px;
-    padding-left: 18px;
-    font-weight: 500;
+    max-width: 220px;
+    margin-top: 26px;
+    padding-left: 28px;
     font-size: 27px;
     line-height: 33px;
     text-align: center;

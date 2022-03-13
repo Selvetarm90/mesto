@@ -5,6 +5,7 @@
   padding: 0;
   width: 24px;
   height: 24px;
+  margin-top: 10px;
   transition: .3s;
 }
 .info__button-reduct:hover{
@@ -15,6 +16,7 @@
   .info__button-reduct{
     width: 18px;
     height: 18px;
+    margin-top: 23px;
     background-size: contain;
   }
 }
