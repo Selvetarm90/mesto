@@ -36,12 +36,16 @@ const initialCards = [
 
 const cards = document.querySelector(".cards");
 
+
 function renderItem(object){
-  const item = document.querySelector(".template-item").content.cloneNode(true);
+  let item = document.querySelector(".template-item").content.cloneNode(true);
   item.querySelector(".item__picture").src = object.link;
   item.querySelector(".item__title").textContent = object.name;
   cards.prepend(item);
+  console.log(item);
+  return item;
 };
+
 
 function openOrCloseForm(modal){
   modal.classList.toggle("popup_opened");
@@ -82,6 +86,15 @@ saveFormAddItem.addEventListener('submit', function(evt){
   renderItem({name: imageTitle.value, link: imageLink.value});
   openOrCloseForm(popupAddItem);
 });
+const popupImage = document.querySelector(".popup_content_image");
+const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
+buttonClosePopupImage.addEventListener("click", function(){
+  openOrCloseForm(popupImage);
+});
+
+ // smallSizePicture.addEventListener("click", function(){
+
+ // });
 
 initialCards.map(renderItem);
 
