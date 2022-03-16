@@ -38,12 +38,15 @@ const cards = document.querySelector(".cards");
 
 
 function renderItem(object){
-  let item = document.querySelector(".template-item").content.cloneNode(true);
-  item.querySelector(".item__picture").src = object.link;
-  item.querySelector(".item__title").textContent = object.name;
+  item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
+  let smallSizePicture = item.querySelector(".item__picture");
+  smallSizePicture.src = object.link;
+  let titlePictue = item.querySelector(".item__title");
+  titlePictue.textContent = object.name;
+  smallSizePicture.addEventListener("click", openPopupImage);
+
   cards.prepend(item);
-  console.log(item);
-  return item;
+
 };
 
 
@@ -92,9 +95,20 @@ buttonClosePopupImage.addEventListener("click", function(){
   openOrCloseForm(popupImage);
 });
 
- // smallSizePicture.addEventListener("click", function(){
 
- // });
 
 initialCards.map(renderItem);
+
+
+ function openPopupImage (evt){
+  const bigSizePicture = popupImage.querySelector(".popup__image");
+  bigSizePicture.src = evt.currentTarget.src;
+  popupImage.querySelector(".popup__heading-image").textContent = evt.currentTarget.nextElementSibling.textContent;
+  openOrCloseForm(popupImage);
+};
+
+function removeItem (evt){
+
+}
+
 
