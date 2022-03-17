@@ -36,7 +36,6 @@ const initialCards = [
 
 const cards = document.querySelector(".cards");
 
-
 function renderItem(object){
   item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
   let smallSizePicture = item.querySelector(".item__picture");
@@ -44,11 +43,12 @@ function renderItem(object){
   let titlePictue = item.querySelector(".item__title");
   titlePictue.textContent = object.name;
   smallSizePicture.addEventListener("click", openPopupImage);
-
+  const delButton = item.querySelector(".item__delete");
+  delButton.addEventListener("click", removeItem);
+  const likeButton = item.querySelector(".item__like");
+  likeButton.addEventListener("click", qetLike);
   cards.prepend(item);
-
 };
-
 
 function openOrCloseForm(modal){
   modal.classList.toggle("popup_opened");
@@ -95,10 +95,7 @@ buttonClosePopupImage.addEventListener("click", function(){
   openOrCloseForm(popupImage);
 });
 
-
-
 initialCards.map(renderItem);
-
 
  function openPopupImage (evt){
   const bigSizePicture = popupImage.querySelector(".popup__image");
@@ -108,7 +105,11 @@ initialCards.map(renderItem);
 };
 
 function removeItem (evt){
+  evt.currentTarget.closest('.item').remove();
 
+}
+function qetLike (evt){
+  evt.currentTarget.classList.toggle("item__like_active");
 }
 
 
