@@ -1,11 +1,11 @@
-let popupReduct = document.querySelector(".popup_button_reduct");
-let reductButton = document.querySelector(".info__button-reduct");
-let formName = popupReduct.querySelector(".form-group__item_el_name");
-let formJob = popupReduct.querySelector(".form-group__item_el_job");
-let profileName = document.querySelector(".info__name");
-let profileAbout = document.querySelector(".info__about");
-let savedFormReduct = popupReduct.querySelector(".form-group");
-let buttonCloseReduct = popupReduct.querySelector(".popup__button-close");
+const popupReduct = document.querySelector(".popup_button_reduct");
+const reductButton = document.querySelector(".info__button-reduct");
+const formName = popupReduct.querySelector(".form-group__item_el_name");
+const formJob = popupReduct.querySelector(".form-group__item_el_job");
+const profileName = document.querySelector(".info__name");
+const profileAbout = document.querySelector(".info__about");
+const savedFormReduct = popupReduct.querySelector(".form-group");
+const buttonCloseReduct = popupReduct.querySelector(".popup__button-close");
 
 const initialCards = [
   {
@@ -36,19 +36,28 @@ const initialCards = [
 
 const cards = document.querySelector(".cards");
 
-function renderItem(object){
-  item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
-  let smallSizePicture = item.querySelector(".item__picture");
+
+function createCard(object) {
+  const item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
+  const smallSizePicture = item.querySelector(".item__picture");
+  const titlePictue = item.querySelector(".item__title");
+  const delButton = item.querySelector(".item__delete");
+  const likeButton = item.querySelector(".item__like");
   smallSizePicture.src = object.link;
-  let titlePictue = item.querySelector(".item__title");
   titlePictue.textContent = object.name;
   smallSizePicture.addEventListener("click", openPopupImage);
-  const delButton = item.querySelector(".item__delete");
   delButton.addEventListener("click", removeItem);
-  const likeButton = item.querySelector(".item__like");
   likeButton.addEventListener("click", qetLike);
+  return item;
+};
+
+
+function renderItem(object){
+  const item = createCard(object)
   cards.prepend(item);
 };
+
+
 
 function openOrCloseForm(modal){
   modal.classList.toggle("popup_opened");
