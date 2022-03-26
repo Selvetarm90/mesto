@@ -45,12 +45,25 @@ function createCard(object) {
   smallSizePicture.src = object.link;
   smallSizePicture.alt = object.name;
   titlePictue.textContent = object.name;
-  smallSizePicture.addEventListener("click", () => openPopupImage(object));
+  smallSizePicture.addEventListener("click", () => {
+    openPopupImage(object)
+    closeClickWithout(popupImage);
+   
+  });
   delButton.addEventListener("click", removeItem);
   likeButton.addEventListener("click", toggleLike);
   return item;
 };
 
+function closeClickWithout (item){
+  if (item.classList.contains("popup_opened")){
+    item.addEventListener('click', function(evt){
+      if (evt.target.classList.contains("popup_opened")){
+        togglePopup(item);
+      };
+    });
+  };
+}
 
 function renderItem(object){
   const item = createCard(object)
@@ -67,7 +80,11 @@ function openReduct(){
   formJob.value = profileAbout.textContent;
 }
 
-reductButton.addEventListener('click', openReduct);
+reductButton.addEventListener('click', function(){
+  openReduct();
+  closeClickWithout(popupProfile);
+
+});
 
 buttonCloseReduct.addEventListener('click', function(){
   togglePopup(popupProfile);
@@ -84,6 +101,7 @@ const addButton = document.querySelector(".profile__add-button");
 const popupAddItem = document.querySelector(".popup_button_add-item");
 addButton.addEventListener("click", function(){
   togglePopup(popupAddItem);
+  closeClickWithout(popupAddItem);
 });
 
 const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
