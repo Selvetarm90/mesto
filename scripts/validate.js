@@ -1,5 +1,5 @@
-function enableValidation() {
-  const form = document.querySelector('.form-group[name="dateForm"]');
+function enableValidation(config) {
+  const form = document.querySelector(config.form);
   form.addEventListener('input', (evt) => handleInputForm(evt, form));
   console.log(form);
 
@@ -14,7 +14,7 @@ showErorr(input, form);
 
 function setError (input){
   const validity = input.validity;
-  console.log(validity);
+ // console.log(validity);
 }
 
 function showErorr (input, form){
@@ -24,4 +24,6 @@ function showErorr (input, form){
 
 };
 
-enableValidation();
+enableValidation({form: '.form-group[name="dateForm"]'});
+
+enableValidation({form: '.form-group[name="date-form-add"]'});
