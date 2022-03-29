@@ -38,4 +38,5 @@
 @import url(../blocks/popup/_content/_image/popup_content_image.css);
 @import url(../blocks/popup/__heading-image/popup__heading-image.css);
 @import url(../blocks/error/error.css);
+@import url(../blocks/form-group/__button-save/_inactive/form-group__button-save_inactive.css);
 

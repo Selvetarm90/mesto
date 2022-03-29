@@ -48,32 +48,32 @@ function createCard(object) {
   smallSizePicture.addEventListener("click", () => {
     openPopupImage(object)
     closeClickWithout(popupImage);
-
   });
   delButton.addEventListener("click", removeItem);
   likeButton.addEventListener("click", toggleLike);
   return item;
 };
+
 function checkAndClose (evt){
   if (evt.target.classList.contains("popup_opened")){
     togglePopup(evt.currentTarget);
+    evt.currentTarget.removeEventListener('click', checkAndClose);
   };
-  evt.currentTarget.removeEventListener('click', checkAndClose);
 }
+
 function closeWithEsc (evt){
   if (evt.key === "Escape"){
     const item = document.querySelector(".popup_opened");
     togglePopup(item);
+    document.removeEventListener('keydown', closeWithEsc);
   }
-  document.removeEventListener('keydown', closeWithEsc);
 }
+
 function closeClickWithout (item){
   if (item.classList.contains("popup_opened")){
     item.addEventListener('click', checkAndClose);
     document.addEventListener('keydown', closeWithEsc);
-
   };
-
 }
 
 function renderItem(object){
@@ -94,7 +94,6 @@ function openReduct(){
 reductButton.addEventListener('click', function(){
   openReduct();
   closeClickWithout(popupProfile);
-
 });
 
 buttonCloseReduct.addEventListener('click', function(){
