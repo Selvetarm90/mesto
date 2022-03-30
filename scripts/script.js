@@ -35,6 +35,7 @@ const initialCards = [
 ];
 
 const cards = document.querySelector(".cards");
+const error = profileForm.querySelectorAll(".error");
 
 function createCard(object) {
   const item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
@@ -83,6 +84,11 @@ function renderItem(object){
 
 function togglePopup(modal){
   modal.classList.toggle("popup_opened");
+  if (modal === popupProfile && popupProfile.classList.contains("popup_opened")){
+    error.forEach(function(element){
+      element.textContent = "";
+    });
+  }
 }
 
 function openReduct(){
