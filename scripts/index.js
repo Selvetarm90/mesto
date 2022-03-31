@@ -37,6 +37,7 @@ const initialCards = [
 const cards = document.querySelector(".cards");
 const error = profileForm.querySelectorAll(".error");
 
+
 function createCard(object) {
   const item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
   const smallSizePicture = item.querySelector(".item__picture");
@@ -71,10 +72,8 @@ function closeWithEsc (evt){
 }
 
 function closeClickWithout (item){
-  if (item.classList.contains("popup_opened")){
     item.addEventListener('click', checkAndClose);
     document.addEventListener('keydown', closeWithEsc);
-  };
 }
 
 function renderItem(object){
@@ -98,6 +97,7 @@ function openReduct(){
 }
 
 reductButton.addEventListener('click', function(){
+
   openReduct();
   closeClickWithout(popupProfile);
 });
@@ -115,7 +115,11 @@ profileForm.addEventListener('submit', function(evt){
 
 const addButton = document.querySelector(".profile__add-button");
 const popupAddItem = document.querySelector(".popup_button_add-item");
+const saveButton = popupAddItem.querySelector(".form-group__button-save");
+
 addButton.addEventListener("click", function(){
+  saveButton.classList.add("form-group__button-save_inactive");
+  saveButton.setAttribute("disabled", "disabled");
   togglePopup(popupAddItem);
   closeClickWithout(popupAddItem);
 });
