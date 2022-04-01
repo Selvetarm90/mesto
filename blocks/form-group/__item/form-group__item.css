@@ -10,6 +10,9 @@
   line-height: 17px;
   box-sizing: border-box;
 }
+.form-group__item::placeholder{
+  color: #c4c4c4;
+}
 @media (max-width: 620px) {
   .form-group__item{
     width: 238px;
