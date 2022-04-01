@@ -49,7 +49,6 @@ function createCard(object) {
   titlePictue.textContent = object.name;
   smallSizePicture.addEventListener("click", () => {
     openPopupImage(object)
-   // closeClickWithout(popupImage);
   });
   delButton.addEventListener("click", removeItem);
   likeButton.addEventListener("click", toggleLike);
@@ -70,13 +69,9 @@ function closeWithEsc (evt){
   }
 }
 
-//function closeClickWithout (item){
-
-//}
-
 function renderItem(object){
-  const item = createCard(object)
-  cards.prepend(item);
+  const newItem = createCard(object)
+  cards.prepend(newItem);
 };
 
 function togglePopup(modal){
@@ -106,7 +101,6 @@ reductButton.addEventListener('click', function(){
   formJob.classList.remove('form-group__item_error');
   saveButtonProfile.removeAttribute("disabled");
   openReduct();
- // closeClickWithout(popupProfile);
 });
 
 buttonCloseReduct.addEventListener('click', function(){
@@ -114,7 +108,6 @@ buttonCloseReduct.addEventListener('click', function(){
 });
 
 profileForm.addEventListener('submit', function(evt){
- // evt.preventDefault();
   profileName.textContent = formName.value;
   profileAbout.textContent = formJob.value;
   togglePopup(popupProfile);
@@ -128,7 +121,6 @@ addButton.addEventListener("click", function(){
   saveButton.classList.add("form-group__button-save_inactive");
   saveButton.setAttribute("disabled", "disabled");
   togglePopup(popupAddItem);
-  //closeClickWithout(popupAddItem);
 });
 
 const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
@@ -140,7 +132,6 @@ const cardForm  = popupAddItem.querySelector(".form-group");
 const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title");
 const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
 cardForm .addEventListener('submit', function(evt){
- // evt.preventDefault();
   renderItem({name: imageTitle.value, link: imageLink.value});
   togglePopup(popupAddItem);
   cardForm.reset();
@@ -152,7 +143,7 @@ buttonClosePopupImage.addEventListener("click", function(){
   togglePopup(popupImage);
 });
 
-initialCards.map(renderItem);
+initialCards.forEach(renderItem);
 
 const bigSizePicture = popupImage.querySelector(".popup__image");
 const popupImageHeading = popupImage.querySelector(".popup__heading-image");
