@@ -6,40 +6,24 @@ const profileName = document.querySelector(".info__name");
 const profileAbout = document.querySelector(".info__about");
 const profileForm = popupProfile.querySelector(".form-group");
 const buttonCloseReduct = popupProfile.querySelector(".popup__button-close");
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const cards = document.querySelector(".cards");
 const error = profileForm.querySelectorAll(".error");
-
+const saveButtonProfile = popupProfile.querySelector(".form-group__button-save");
+const addButton = document.querySelector(".profile__add-button");
+const popupAddItem = document.querySelector(".popup_button_add-item");
+const saveButton = popupAddItem.querySelector(".form-group__button-save");
+const cardForm  = popupAddItem.querySelector(".form-group");
+const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title");
+const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
+const template = document.querySelector(".template-item");
+const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
+const popupImage = document.querySelector(".popup_content_image");
+const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
+const bigSizePicture = popupImage.querySelector(".popup__image");
+const popupImageHeading = popupImage.querySelector(".popup__heading-image");
 
 function createCard(object) {
-  const item = document.querySelector(".template-item").content.firstElementChild.cloneNode(true);
+  const item = template.content.firstElementChild.cloneNode(true);
   const smallSizePicture = item.querySelector(".item__picture");
   const titlePictue = item.querySelector(".item__title");
   const delButton = item.querySelector(".item__delete");
@@ -94,7 +78,22 @@ function openReduct(){
   formName.value = profileName.textContent;
   formJob.value = profileAbout.textContent;
 }
-const saveButtonProfile = popupProfile.querySelector(".form-group__button-save");
+
+function openPopupImage (object){
+  bigSizePicture.src = object.link;
+  bigSizePicture.alt = object.name;
+  popupImageHeading.textContent = object.name;
+  togglePopup(popupImage);
+};
+
+function removeItem (evt){
+  evt.currentTarget.closest('.item').remove();
+
+}
+function toggleLike (evt){
+  evt.currentTarget.classList.toggle("item__like_active");
+}
+
 reductButton.addEventListener('click', function(){
   saveButtonProfile.classList.remove("form-group__button-save_inactive");
   formName.classList.remove('form-group__item_error');
@@ -113,53 +112,32 @@ profileForm.addEventListener('submit', function(evt){
   togglePopup(popupProfile);
 });
 
-const addButton = document.querySelector(".profile__add-button");
-const popupAddItem = document.querySelector(".popup_button_add-item");
-const saveButton = popupAddItem.querySelector(".form-group__button-save");
-
 addButton.addEventListener("click", function(){
   saveButton.classList.add("form-group__button-save_inactive");
   saveButton.setAttribute("disabled", "disabled");
   togglePopup(popupAddItem);
 });
 
-const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
 closePopupAddItem.addEventListener('click', function(){
   togglePopup(popupAddItem);
 });
 
-const cardForm  = popupAddItem.querySelector(".form-group");
-const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title");
-const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
+
 cardForm .addEventListener('submit', function(evt){
   renderItem({name: imageTitle.value, link: imageLink.value});
   togglePopup(popupAddItem);
   cardForm.reset();
 });
 
-const popupImage = document.querySelector(".popup_content_image");
-const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
 buttonClosePopupImage.addEventListener("click", function(){
   togglePopup(popupImage);
 });
 
 initialCards.forEach(renderItem);
 
-const bigSizePicture = popupImage.querySelector(".popup__image");
-const popupImageHeading = popupImage.querySelector(".popup__heading-image");
-function openPopupImage (object){
-  bigSizePicture.src = object.link;
-  bigSizePicture.alt = object.name;
-  popupImageHeading.textContent = object.name;
-  togglePopup(popupImage);
-};
 
-function removeItem (evt){
-  evt.currentTarget.closest('.item').remove();
 
-}
-function toggleLike (evt){
-  evt.currentTarget.classList.toggle("item__like_active");
-}
+
+
 
 
