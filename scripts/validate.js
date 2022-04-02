@@ -1,24 +1,23 @@
 function enableValidation(config) {
-  const form = Array.from(document.querySelectorAll(config.form));
-
-  setEventListener(form, config);
+  const formList = Array.from(document.querySelectorAll(config.form));
+  formList.forEach(function(elementform){
+    setEventListener(elementform, config);
+  }); 
 }
-
-function setEventListener(form, config){
-  form.forEach(function(element){
-    const inputList = Array.from(element.querySelectorAll(config.inputClass));
-    element.addEventListener('input', (evt) => handleInputForm(evt, element, config, inputList));
-    element.addEventListener('submit', function(evt){
-      evt.preventDefault();
-    });
-  });
-  }
 
 function handleInputForm(evt, form, config, inputList){
   const input = evt.target;
   toggleButtonState(form, config, inputList);
   checkInputValidity(input, form, config);
 };
+
+function setEventListener(elementform, config){
+    const inputList = Array.from(elementform.querySelectorAll(config.inputClass));
+    elementform.addEventListener('input', (evt) => handleInputForm(evt, elementform, config, inputList));
+    elementform.addEventListener('submit', function(evt){
+      evt.preventDefault();
+    });
+  }
 
 function checkInputValidity (input, form, config){
   const isValidInput = input.validity.valid;
@@ -49,17 +48,11 @@ const hasInvalidInput = (inputList) => {
 function toggleButtonState (form, config, inputList){
   const buttonSubmit = form.querySelector(config.buttonSubmit);
   if (!hasInvalidInput(inputList)){
-   buttonSubmit.classList.remove(config.buttonSubmitInactiveClass);
-   buttonSubmit.removeAttribute("disabled");
+   setActiveButtonState(buttonSubmit);
   }
   else {
-    buttonSubmit.classList.add(config.buttonSubmitInactiveClass);
-    buttonSubmit.setAttribute("disabled", "disabled");
+   setInactiveButtonState(buttonSubmit);
   }
 }
 
-enableValidation({form: '.form-group',
-                  buttonSubmit: '.form-group__button-save',
-                  inputClass: '.form-group__item',
-                  inputErrorClass: 'form-group__item_error',
-                  buttonSubmitInactiveClass: 'form-group__button-save_inactive'});
+enableValidation(options);

@@ -21,18 +21,25 @@ const popupImage = document.querySelector(".popup_content_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
 const bigSizePicture = popupImage.querySelector(".popup__image");
 const popupImageHeading = popupImage.querySelector(".popup__heading-image");
+const options = {
+  form: '.form-group',
+  buttonSubmit: '.form-group__button-save',
+  inputClass: '.form-group__item',
+  inputErrorClass: 'form-group__item_error',
+  buttonSubmitInactiveClass: 'form-group__button-save_inactive'
+}; 
 
-function createCard(object) {
+function createCard(card) {
   const item = template.content.firstElementChild.cloneNode(true);
   const smallSizePicture = item.querySelector(".item__picture");
   const titlePictue = item.querySelector(".item__title");
   const delButton = item.querySelector(".item__delete");
   const likeButton = item.querySelector(".item__like");
-  smallSizePicture.src = object.link;
-  smallSizePicture.alt = object.name;
-  titlePictue.textContent = object.name;
+  smallSizePicture.src = card.link;
+  smallSizePicture.alt = card.name;
+  titlePictue.textContent = card.name;
   smallSizePicture.addEventListener("click", () => {
-    openPopupImage(object)
+    openPopupImage(card)
   });
   delButton.addEventListener("click", removeItem);
   likeButton.addEventListener("click", toggleLike);
@@ -53,8 +60,8 @@ function closeWithEsc (evt){
   }
 }
 
-function renderItem(object){
-  const newItem = createCard(object)
+function renderItem(card){
+  const newItem = createCard(card)
   cards.prepend(newItem);
 };
 
@@ -68,21 +75,22 @@ function togglePopup(modal){
 
 }
 
-function openReduct(){
+function toggleReduct(){
   togglePopup(popupProfile);
   if (popupProfile.classList.contains("popup_opened")){
     error.forEach(function(spanError){
       spanError.textContent = "";
-    });
+    }); 
   }
+  
   formName.value = profileName.textContent;
-  formJob.value = profileAbout.textContent;
+  formJob.value = profileAbout.textContent; 
 }
 
-function openPopupImage (object){
-  bigSizePicture.src = object.link;
-  bigSizePicture.alt = object.name;
-  popupImageHeading.textContent = object.name;
+function openPopupImage (card){
+  bigSizePicture.src = card.link;
+  bigSizePicture.alt = card.name;
+  popupImageHeading.textContent = card.name;
   togglePopup(popupImage);
 };
 
@@ -94,12 +102,22 @@ function toggleLike (evt){
   evt.currentTarget.classList.toggle("item__like_active");
 }
 
+function setActiveButtonState(button){
+  button.classList.remove(options.buttonSubmitInactiveClass);
+  button.removeAttribute("disabled");
+};
+
+function setInactiveButtonState(button){
+  button.classList.add(options.buttonSubmitInactiveClass);
+  button.setAttribute("disabled", "true");
+};
+
 reductButton.addEventListener('click', function(){
-  saveButtonProfile.classList.remove("form-group__button-save_inactive");
-  formName.classList.remove('form-group__item_error');
-  formJob.classList.remove('form-group__item_error');
-  saveButtonProfile.removeAttribute("disabled");
-  openReduct();
+  setActiveButtonState(saveButtonProfile);
+  formName.classList.remove(options.inputErrorClass);
+  formJob.classList.remove(options.inputErrorClass);
+  
+  toggleReduct();
 });
 
 buttonCloseReduct.addEventListener('click', function(){
@@ -113,8 +131,7 @@ profileForm.addEventListener('submit', function(evt){
 });
 
 addButton.addEventListener("click", function(){
-  saveButton.classList.add("form-group__button-save_inactive");
-  saveButton.setAttribute("disabled", "disabled");
+  setInactiveButtonState(saveButton);
   togglePopup(popupAddItem);
 });
 
@@ -134,10 +151,3 @@ buttonClosePopupImage.addEventListener("click", function(){
 });
 
 initialCards.forEach(renderItem);
-
-
-
-
-
-
-
