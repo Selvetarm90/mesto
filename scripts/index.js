@@ -6,7 +6,7 @@ const profileName = document.querySelector(".info__name");
 const profileAbout = document.querySelector(".info__about");
 const profileForm = popupProfile.querySelector(".form-group");
 const buttonCloseReduct = popupProfile.querySelector(".popup__button-close");
-const cards = document.querySelector(".cards");
+
 const error = profileForm.querySelectorAll(".error");
 const saveButtonProfile = popupProfile.querySelector(".form-group__button-save");
 const addButton = document.querySelector(".profile__add-button");
@@ -15,7 +15,7 @@ const saveButton = popupAddItem.querySelector(".form-group__button-save");
 const cardForm  = popupAddItem.querySelector(".form-group");
 const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title");
 const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
-const template = document.querySelector(".template-item");
+
 const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
 const popupImage = document.querySelector(".popup_content_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
@@ -27,17 +27,11 @@ const options = {
   inputClass: '.form-group__item',
   inputErrorClass: 'form-group__item_error',
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
-}; 
+};
 
 function createCard(card) {
-  const item = template.content.firstElementChild.cloneNode(true);
-  const smallSizePicture = item.querySelector(".item__picture");
-  const titlePictue = item.querySelector(".item__title");
-  const delButton = item.querySelector(".item__delete");
-  const likeButton = item.querySelector(".item__like");
-  smallSizePicture.src = card.link;
-  smallSizePicture.alt = card.name;
-  titlePictue.textContent = card.name;
+
+
   smallSizePicture.addEventListener("click", () => {
     openPopupImage(card)
   });
@@ -80,11 +74,11 @@ function toggleReduct(){
   if (popupProfile.classList.contains("popup_opened")){
     error.forEach(function(spanError){
       spanError.textContent = "";
-    }); 
+    });
   }
-  
+
   formName.value = profileName.textContent;
-  formJob.value = profileAbout.textContent; 
+  formJob.value = profileAbout.textContent;
 }
 
 function openPopupImage (card){
@@ -116,7 +110,7 @@ reductButton.addEventListener('click', function(){
   setActiveButtonState(saveButtonProfile);
   formName.classList.remove(options.inputErrorClass);
   formJob.classList.remove(options.inputErrorClass);
-  
+
   toggleReduct();
 });
 
