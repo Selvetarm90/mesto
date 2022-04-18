@@ -15,12 +15,11 @@ const saveButton = popupAddItem.querySelector(".form-group__button-save");
 const cardForm  = popupAddItem.querySelector(".form-group");
 const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title");
 const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
-
-const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
 const popupImage = document.querySelector(".popup_content_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
-const bigSizePicture = popupImage.querySelector(".popup__image");
-const popupImageHeading = popupImage.querySelector(".popup__heading-image");
+
+const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
+
 const options = {
   form: '.form-group',
   buttonSubmit: '.form-group__button-save',
@@ -32,11 +31,11 @@ const options = {
 function createCard(card) {
 
 
-  smallSizePicture.addEventListener("click", () => {
-    openPopupImage(card)
-  });
-  delButton.addEventListener("click", removeItem);
-  likeButton.addEventListener("click", toggleLike);
+ // smallSizePicture.addEventListener("click", () => {
+   // openPopupImage(card)
+ // });
+ // delButton.addEventListener("click", removeItem);
+ // likeButton.addEventListener("click", toggleLike);
   return item;
 };
 
@@ -81,20 +80,17 @@ function toggleReduct(){
   formJob.value = profileAbout.textContent;
 }
 
-function openPopupImage (card){
-  bigSizePicture.src = card.link;
-  bigSizePicture.alt = card.name;
-  popupImageHeading.textContent = card.name;
-  togglePopup(popupImage);
-};
+//function openPopupImage (card){
+  //bigSizePicture.src = card.link;
+  //bigSizePicture.alt = card.name;
+  //popupImageHeading.textContent = card.name;
+  //togglePopup(popupImage);
+//};
 
-function removeItem (evt){
-  evt.currentTarget.closest('.item').remove();
 
-}
-function toggleLike (evt){
-  evt.currentTarget.classList.toggle("item__like_active");
-}
+//function toggleLike (evt){
+//  evt.currentTarget.classList.toggle("item__like_active");
+//}
 
 function setActiveButtonState(button){
   button.classList.remove(options.buttonSubmitInactiveClass);
@@ -144,4 +140,6 @@ buttonClosePopupImage.addEventListener("click", function(){
   togglePopup(popupImage);
 });
 
-initialCards.forEach(renderItem);
+//initialCards.forEach(renderItem);
+
+export {togglePopup, popupImage};
