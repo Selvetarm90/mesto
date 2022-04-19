@@ -6,7 +6,6 @@ const profileName = document.querySelector(".info__name");
 const profileAbout = document.querySelector(".info__about");
 const profileForm = popupProfile.querySelector(".form-group");
 const buttonCloseReduct = popupProfile.querySelector(".popup__button-close");
-
 const error = profileForm.querySelectorAll(".error");
 const saveButtonProfile = popupProfile.querySelector(".form-group__button-save");
 const addButton = document.querySelector(".profile__add-button");
@@ -17,9 +16,7 @@ const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title"
 const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
 const popupImage = document.querySelector(".popup_content_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
-
 const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
-
 const options = {
   form: '.form-group',
   buttonSubmit: '.form-group__button-save',
@@ -28,16 +25,7 @@ const options = {
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
 };
 
-function createCard(card) {
-
-
- // smallSizePicture.addEventListener("click", () => {
-   // openPopupImage(card)
- // });
- // delButton.addEventListener("click", removeItem);
- // likeButton.addEventListener("click", toggleLike);
-  return item;
-};
+import {renderCard} from "./Card.js";
 
 function checkAndClose (evt){
   if (evt.target.classList.contains("popup_opened")){
@@ -53,11 +41,6 @@ function closeWithEsc (evt){
   }
 }
 
-function renderItem(card){
-  const newItem = createCard(card)
-  cards.prepend(newItem);
-};
-
 function togglePopup(modal){
   modal.classList.toggle("popup_opened");
   modal.addEventListener('click', checkAndClose);
@@ -65,7 +48,6 @@ function togglePopup(modal){
   if (!modal.classList.contains("popup_opened")){
     document.removeEventListener('keydown', closeWithEsc);
   };
-
 }
 
 function toggleReduct(){
@@ -75,22 +57,9 @@ function toggleReduct(){
       spanError.textContent = "";
     });
   }
-
   formName.value = profileName.textContent;
   formJob.value = profileAbout.textContent;
 }
-
-//function openPopupImage (card){
-  //bigSizePicture.src = card.link;
-  //bigSizePicture.alt = card.name;
-  //popupImageHeading.textContent = card.name;
-  //togglePopup(popupImage);
-//};
-
-
-//function toggleLike (evt){
-//  evt.currentTarget.classList.toggle("item__like_active");
-//}
 
 function setActiveButtonState(button){
   button.classList.remove(options.buttonSubmitInactiveClass);
@@ -106,7 +75,6 @@ reductButton.addEventListener('click', function(){
   setActiveButtonState(saveButtonProfile);
   formName.classList.remove(options.inputErrorClass);
   formJob.classList.remove(options.inputErrorClass);
-
   toggleReduct();
 });
 
@@ -131,7 +99,7 @@ closePopupAddItem.addEventListener('click', function(){
 
 
 cardForm .addEventListener('submit', function(evt){
-  renderItem({name: imageTitle.value, link: imageLink.value});
+  renderCard({name: imageTitle.value, link: imageLink.value});
   togglePopup(popupAddItem);
   cardForm.reset();
 });
@@ -140,6 +108,4 @@ buttonClosePopupImage.addEventListener("click", function(){
   togglePopup(popupImage);
 });
 
-//initialCards.forEach(renderItem);
-
-export {togglePopup, popupImage};
+export {togglePopup, popupImage, options, setInactiveButtonState, setActiveButtonState};

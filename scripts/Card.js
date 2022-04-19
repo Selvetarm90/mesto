@@ -30,6 +30,7 @@ const cards = document.querySelector(".cards");
 import {togglePopup, popupImage} from "./index.js"
 const bigSizePicture = popupImage.querySelector(".popup__image");
 const popupImageHeading = popupImage.querySelector(".popup__heading-image");
+
 class Card {
   constructor (data){
     this._name = data.name;
@@ -81,11 +82,16 @@ class Card {
     togglePopup(popupImage);
   }
 
-
 }
-initialCards.forEach((item) =>{
+
+function renderCard (item){
   const card = new Card (item);
   const cardElement = card.generateCard();
   cards.prepend(cardElement);
-  });
+}
 
+initialCards.forEach((item) =>{
+  renderCard(item);
+});
+
+ export {renderCard};

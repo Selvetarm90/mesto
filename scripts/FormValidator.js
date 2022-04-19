@@ -1,58 +1,70 @@
-function enableValidation(config) {
-  const formList = Array.from(document.querySelectorAll(config.form));
-  formList.forEach(function(elementform){
-    setEventListener(elementform, config);
-  }); 
-}
+import {options, setInactiveButtonState, setActiveButtonState} from "./index.js"
 
-function handleInputForm(evt, form, config, inputList){
-  const input = evt.target;
-  toggleButtonState(form, config, inputList);
-  checkInputValidity(input, form, config);
-};
+class FormValidator {
+  constructor(config, formForValid){
+    this._config = config;
+    this._formForValid = formForValid;
+  }
 
-function setEventListener(elementform, config){
-    const inputList = Array.from(elementform.querySelectorAll(config.inputClass));
-    elementform.addEventListener('input', (evt) => handleInputForm(evt, elementform, config, inputList));
-    elementform.addEventListener('submit', function(evt){
+  enableValidation() {
+    this._setEventListener();
+  }
+
+  _setEventListener(){
+    const inputList = Array.from(this._formForValid.querySelectorAll(this._config.inputClass));
+    this._formForValid.addEventListener('input', (evt) => this._handleInputForm(evt, inputList));
+    this._formForValid.addEventListener('submit', function(evt){
       evt.preventDefault();
     });
   }
 
-function checkInputValidity (input, form, config){
-  const isValidInput = input.validity.valid;
-  if (!isValidInput){
-    showInputErorr(input, form, config);
+  _handleInputForm(evt, inputList){
+    const input = evt.target;
+    this._toggleButtonState(inputList);
+    this._checkInputValidity(input);
+  };
+
+  _checkInputValidity (input){
+    const isValidInput = input.validity.valid;
+    if (!isValidInput){
+      this._showInputErorr(input);
+    }
+    else this._hideInpuError(input);
   }
-  else hideInpuError(input, form, config);
-}
 
-function showInputErorr (input, form, config){
-  const errorMessage = form.querySelector(`#${input.id}-error`);
-  input.classList.add(config.inputErrorClass);
-  errorMessage.textContent = input.validationMessage;
-}
-
-function hideInpuError (input, form, config){
-  const errorMessage = form.querySelector(`#${input.id}-error`);
-  input.classList.remove(config.inputErrorClass);
-  errorMessage.textContent = "";
-}
-
-const hasInvalidInput = (inputList) => {
-  return inputList.some((input) => {
-    return !input.validity.valid;
-  });
-};
-
-function toggleButtonState (form, config, inputList){
-  const buttonSubmit = form.querySelector(config.buttonSubmit);
-  if (!hasInvalidInput(inputList)){
-   setActiveButtonState(buttonSubmit);
+  _toggleButtonState (inputList){
+    const buttonSubmit = this._formForValid.querySelector(this._config.buttonSubmit);
+    if (!this._hasInvalidInput(inputList)){
+     setActiveButtonState(buttonSubmit);
+    }
+    else {
+     setInactiveButtonState(buttonSubmit);
+    }
   }
-  else {
-   setInactiveButtonState(buttonSubmit);
+
+  _showInputErorr (input){
+    const errorMessage = this._formForValid.querySelector(`#${input.id}-error`);
+    input.classList.add(this._config.inputErrorClass);
+    errorMessage.textContent = input.validationMessage;
   }
+
+  _hideInpuError (input){
+    const errorMessage = this._formForValid.querySelector(`#${input.id}-error`);
+    input.classList.remove(this._config.inputErrorClass);
+    errorMessage.textContent = "";
+  }
+  _hasInvalidInput = (inputList) => {
+    return inputList.some((input) => {
+      return !input.validity.valid;
+    });
+  };
 }
 
-enableValidation(options);
+const profileForm = document.querySelector(".form-group[name='dateForm']");
+const validationProfileForm = new FormValidator(options, profileForm);
+validationProfileForm.enableValidation();
+
+const addCardForm = document.querySelector(".form-group[name='date-form-add']");
+const validationaddCardForm = new FormValidator(options, addCardForm);
+validationaddCardForm.enableValidation();
+
