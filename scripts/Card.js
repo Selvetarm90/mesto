@@ -1,44 +1,13 @@
-const initialCards = [
-    {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-const template = document.querySelector(".template-item");
-const cards = document.querySelector(".cards");
-
-import {togglePopup, popupImage} from "./index.js"
-const bigSizePicture = popupImage.querySelector(".popup__image");
-const popupImageHeading = popupImage.querySelector(".popup__heading-image");
-
+import {openPopup, closePopup} from "./utils.js"
 class Card {
-  constructor (data){
+  constructor (data, template){
     this._name = data.name;
     this._link = data.link;
+    this._template = template;
   }
 
   _getTemplate(){
-    const item = template.content.firstElementChild.cloneNode(true);
+    const item = this._template.content.firstElementChild.cloneNode(true);
     return item;
   }
 
@@ -76,22 +45,15 @@ class Card {
   };
 
   _openPopupImage(){
+    const popupImage = document.querySelector(".popup_content_image");
+    const bigSizePicture = popupImage.querySelector(".popup__image");
+    const popupImageHeading = popupImage.querySelector(".popup__heading-image");
     bigSizePicture.src = this._link;
     bigSizePicture.alt = this._name;
     popupImageHeading.textContent = this._name;
-    togglePopup(popupImage);
+    openPopup(popupImage);
   }
 
 }
 
-function renderCard (item){
-  const card = new Card (item);
-  const cardElement = card.generateCard();
-  cards.prepend(cardElement);
-}
-
-initialCards.forEach((item) =>{
-  renderCard(item);
-});
-
- export {renderCard};
+ export {Card};

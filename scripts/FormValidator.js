@@ -1,9 +1,10 @@
-import {options, setInactiveButtonState, setActiveButtonState} from "./index.js"
+//import {options, setInactiveButtonState, setActiveButtonState} from "./index.js"
 
 class FormValidator {
   constructor(config, formForValid){
     this._config = config;
     this._formForValid = formForValid;
+    this._buttonSubmit = formForValid.querySelector(config.buttonSubmit);
   }
 
   enableValidation() {
@@ -20,7 +21,7 @@ class FormValidator {
 
   _handleInputForm(evt, inputList){
     const input = evt.target;
-    this._toggleButtonState(inputList);
+    this.toggleButtonState(inputList);
     this._checkInputValidity(input);
   };
 
@@ -29,16 +30,25 @@ class FormValidator {
     if (!isValidInput){
       this._showInputErorr(input);
     }
-    else this._hideInpuError(input);
+    else this.hideInpuError(input);
   }
 
-  _toggleButtonState (inputList){
-    const buttonSubmit = this._formForValid.querySelector(this._config.buttonSubmit);
+  setActiveButtonState(){
+    this._buttonSubmit.classList.remove(this._config.buttonSubmitInactiveClass);
+    this._buttonSubmit.removeAttribute("disabled");
+  };
+
+  setInactiveButtonState(){
+    this._buttonSubmit.classList.add(this._config.buttonSubmitInactiveClass);
+    this._buttonSubmit.setAttribute("disabled", "true");
+  };
+
+  toggleButtonState (inputList){
     if (!this._hasInvalidInput(inputList)){
-     setActiveButtonState(buttonSubmit);
+     this.setActiveButtonState();
     }
     else {
-     setInactiveButtonState(buttonSubmit);
+     this.setInactiveButtonState();
     }
   }
 
@@ -48,7 +58,7 @@ class FormValidator {
     errorMessage.textContent = input.validationMessage;
   }
 
-  _hideInpuError (input){
+  hideInpuError (input){
     const errorMessage = this._formForValid.querySelector(`#${input.id}-error`);
     input.classList.remove(this._config.inputErrorClass);
     errorMessage.textContent = "";
@@ -59,12 +69,4 @@ class FormValidator {
     });
   };
 }
-
-const profileForm = document.querySelector(".form-group[name='dateForm']");
-const validationProfileForm = new FormValidator(options, profileForm);
-validationProfileForm.enableValidation();
-
-const addCardForm = document.querySelector(".form-group[name='date-form-add']");
-const validationaddCardForm = new FormValidator(options, addCardForm);
-validationaddCardForm.enableValidation();
-
+export {FormValidator};
