@@ -1,14 +1,15 @@
 .form-group__item {
   border: none;
+
   border-bottom: 1px solid rgba(0, 0, 0, .2);
   font-family: inherit;
-  width: 358px;
+  width: 354px;
   margin: 0;
-  padding-top: 26px;
+  padding-top: 0px;
   padding-bottom: 11px;
   font-size: 14px;
   line-height: 17px;
-  box-sizing: border-box;
+
 }
 .form-group__item::placeholder{
   color: #c4c4c4;

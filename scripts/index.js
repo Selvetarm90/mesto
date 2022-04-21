@@ -23,15 +23,11 @@ const options = {
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
 };
 import {initialCards} from "./initialCards.js";
-
 import {openPopup, closePopup} from "./utils.js";
-
 import {Card} from "./Card.js";
-
 import {FormValidator} from "./FormValidator.js";
 
 const validationProfileForm = new FormValidator(options, profileForm);
-
 const validationaddCardForm = new FormValidator(options, cardForm);
 
 
@@ -45,19 +41,7 @@ function openPopupReduct(){
     validationProfileForm.hideInpuError(input);
     });
     validationProfileForm.toggleButtonState(inputList);
-
-
 }
-
-//function setActiveButtonState(button){
- // button.classList.remove(options.buttonSubmitInactiveClass);
- // button.removeAttribute("disabled");
-//};
-
-//function setInactiveButtonState(button){
- // button.classList.add(options.buttonSubmitInactiveClass);
- // button.setAttribute("disabled", "true");
-//};
 
 reductButton.addEventListener('click', function(){
   validationProfileForm.setActiveButtonState();
@@ -85,7 +69,6 @@ closePopupAddItem.addEventListener('click', function(){
   closePopup(popupAddItem);
 });
 
-
 cardForm .addEventListener('submit', function(evt){
   renderCard({name: imageTitle.value, link: imageLink.value});
   closePopup(popupAddItem);
@@ -111,12 +94,5 @@ initialCards.forEach((item) =>{
 
 });
 
-//const profileForm = document.querySelector(".form-group[name='dateForm']");
-
 validationProfileForm.enableValidation();
-
-//const addCardForm = document.querySelector(".form-group[name='date-form-add']");
-
 validationaddCardForm.enableValidation();
-
-//export {togglePopup, popupImage, options};

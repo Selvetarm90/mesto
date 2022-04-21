@@ -1,5 +1,3 @@
-//import {options, setInactiveButtonState, setActiveButtonState} from "./index.js"
-
 class FormValidator {
   constructor(config, formForValid){
     this._config = config;

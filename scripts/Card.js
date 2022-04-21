@@ -1,4 +1,4 @@
-import {openPopup, closePopup} from "./utils.js"
+import {openPopup} from "./utils.js"
 class Card {
   constructor (data, template){
     this._name = data.name;
