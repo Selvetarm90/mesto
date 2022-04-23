@@ -6,153 +6,83 @@ const profileName = document.querySelector(".info__name");
 const profileAbout = document.querySelector(".info__about");
 const profileForm = popupProfile.querySelector(".form-group");
 const buttonCloseReduct = popupProfile.querySelector(".popup__button-close");
-const cards = document.querySelector(".cards");
-const error = profileForm.querySelectorAll(".error");
-const saveButtonProfile = popupProfile.querySelector(".form-group__button-save");
 const addButton = document.querySelector(".profile__add-button");
 const popupAddItem = document.querySelector(".popup_button_add-item");
-const saveButton = popupAddItem.querySelector(".form-group__button-save");
 const cardForm  = popupAddItem.querySelector(".form-group");
 const imageTitle = popupAddItem.querySelector(".form-group__item_el_image-title");
 const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
-const template = document.querySelector(".template-item");
-const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
 const popupImage = document.querySelector(".popup_content_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
-const bigSizePicture = popupImage.querySelector(".popup__image");
-const popupImageHeading = popupImage.querySelector(".popup__heading-image");
+const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
+const template = document.querySelector(".template-item");
+const cards = document.querySelector(".cards");
 const options = {
-  form: '.form-group',
   buttonSubmit: '.form-group__button-save',
   inputClass: '.form-group__item',
   inputErrorClass: 'form-group__item_error',
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
-}; 
-import initialCards from './cards';
-class Card {
-  constructor(card){
-    
-  }
-}
-function createCard(card) {
-  const item = template.content.firstElementChild.cloneNode(true);
-  const smallSizePicture = item.querySelector(".item__picture");
-  const titlePictue = item.querySelector(".item__title");
-  const delButton = item.querySelector(".item__delete");
-  const likeButton = item.querySelector(".item__like");
-  smallSizePicture.src = card.link;
-  smallSizePicture.alt = card.name;
-  titlePictue.textContent = card.name;
-  smallSizePicture.addEventListener("click", () => {
-    openPopupImage(card)
-  });
-  delButton.addEventListener("click", removeItem);
-  likeButton.addEventListener("click", toggleLike);
-  return item;
 };
+import {initialCards} from "./initialCards.js";
+import {openPopup, closePopup} from "./utils.js";
+import {Card} from "./Card.js";
+import {FormValidator} from "./FormValidator.js";
 
-function checkAndClose (evt){
-  if (evt.target.classList.contains("popup_opened")){
-    togglePopup(evt.currentTarget);
-    evt.currentTarget.removeEventListener('click', checkAndClose);
-  };
-}
+const validationProfileForm = new FormValidator(options, profileForm);
+const validationaddCardForm = new FormValidator(options, cardForm);
 
-function closeWithEsc (evt){
-  if (evt.key === "Escape"){
-    const item = document.querySelector(".popup_opened");
-    togglePopup(item);
-  }
-}
-
-function renderItem(card){
-  const newItem = createCard(card)
-  cards.prepend(newItem);
-};
-
-function togglePopup(modal){
-  modal.classList.toggle("popup_opened");
-  modal.addEventListener('click', checkAndClose);
-  document.addEventListener('keydown', closeWithEsc);
-  if (!modal.classList.contains("popup_opened")){
-    document.removeEventListener('keydown', closeWithEsc);
-  };
-
-}
-
-function toggleReduct(){
-  togglePopup(popupProfile);
-  if (popupProfile.classList.contains("popup_opened")){
-    error.forEach(function(spanError){
-      spanError.textContent = "";
-    }); 
-  }
-  
+function openPopupReduct(){
   formName.value = profileName.textContent;
-  formJob.value = profileAbout.textContent; 
+  formJob.value = profileAbout.textContent;
+  validationProfileForm.setHideInputError();
+  openPopup(popupProfile);
 }
-
-function openPopupImage (card){
-  bigSizePicture.src = card.link;
-  bigSizePicture.alt = card.name;
-  popupImageHeading.textContent = card.name;
-  togglePopup(popupImage);
-};
-
-function removeItem (evt){
-  evt.currentTarget.closest('.item').remove();
-
-}
-function toggleLike (evt){
-  evt.currentTarget.classList.toggle("item__like_active");
-}
-
-function setActiveButtonState(button){
-  button.classList.remove(options.buttonSubmitInactiveClass);
-  button.removeAttribute("disabled");
-};
-
-function setInactiveButtonState(button){
-  button.classList.add(options.buttonSubmitInactiveClass);
-  button.setAttribute("disabled", "true");
-};
 
 reductButton.addEventListener('click', function(){
-  setActiveButtonState(saveButtonProfile);
-  formName.classList.remove(options.inputErrorClass);
-  formJob.classList.remove(options.inputErrorClass);
-  
-  toggleReduct();
+  openPopupReduct();
 });
 
 buttonCloseReduct.addEventListener('click', function(){
-  togglePopup(popupProfile);
+  closePopup(popupProfile);
 });
 
 profileForm.addEventListener('submit', function(evt){
   profileName.textContent = formName.value;
   profileAbout.textContent = formJob.value;
-  togglePopup(popupProfile);
+  closePopup(popupProfile);
 });
 
 addButton.addEventListener("click", function(){
-  setInactiveButtonState(saveButton);
-  togglePopup(popupAddItem);
+  validationaddCardForm.setHideInputError();
+  openPopup(popupAddItem);
 });
 
 closePopupAddItem.addEventListener('click', function(){
-  togglePopup(popupAddItem);
+  closePopup(popupAddItem);
 });
 
-
 cardForm .addEventListener('submit', function(evt){
-  renderItem({name: imageTitle.value, link: imageLink.value});
-  togglePopup(popupAddItem);
+  renderCard({name: imageTitle.value, link: imageLink.value});
+  closePopup(popupAddItem);
   cardForm.reset();
 });
 
 buttonClosePopupImage.addEventListener("click", function(){
-  togglePopup(popupImage);
+  closePopup(popupImage);
 });
 
-initialCards.forEach(renderItem);
+function createCard (item){
+  const card = new Card (item, template);
+  const cardElement = card.generateCard();
+  return cardElement
+}
+
+function renderCard (item){
+  cards.prepend(createCard (item));
+}
+
+initialCards.forEach((item) =>{
+  renderCard(item);
+});
+
+validationProfileForm.enableValidation();
+validationaddCardForm.enableValidation();
