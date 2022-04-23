@@ -28,7 +28,12 @@ const options = {
   inputErrorClass: 'form-group__item_error',
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
 }; 
-
+import initialCards from './cards';
+class Card {
+  constructor(card){
+    
+  }
+}
 function createCard(card) {
   const item = template.content.firstElementChild.cloneNode(true);
   const smallSizePicture = item.querySelector(".item__picture");
