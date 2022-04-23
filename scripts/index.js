@@ -33,20 +33,20 @@ const validationaddCardForm = new FormValidator(options, cardForm);
 
 
 function openPopupReduct(){
-  openPopup(popupProfile);
-    const inputList = Array.from(popupProfile.querySelectorAll(options.inputClass));
+   // const inputList = Array.from(popupProfile.querySelectorAll(options.inputClass));
     formName.value = profileName.textContent;
     formJob.value = profileAbout.textContent;
-    inputList.forEach(function(input){
-    validationProfileForm.hideInpuError(input);
-    });
-    validationProfileForm.toggleButtonState(inputList);
+   // inputList.forEach(function(input){
+    //validationProfileForm.hideInpuError(input);
+   // });
+   validationProfileForm.setHideInputError(/*inputList*/);
+   openPopup(popupProfile);
 }
 
 reductButton.addEventListener('click', function(){
-  validationProfileForm.setActiveButtonState();
-  formName.classList.remove(options.inputErrorClass);
-  formJob.classList.remove(options.inputErrorClass);
+ // validationProfileForm.setActiveButtonState();
+ // formName.classList.remove(options.inputErrorClass);
+ // formJob.classList.remove(options.inputErrorClass);
   openPopupReduct();
 });
 
@@ -79,19 +79,18 @@ buttonClosePopupImage.addEventListener("click", function(){
   closePopup(popupImage);
 });
 
-function createCard (cardElement){
-  cards.prepend(cardElement);
+function createCard (item){
+  const card = new Card (item, template);
+  const cardElement = card.generateCard();
+  return cardElement
 }
 
 function renderCard (item){
-  const card = new Card (item, template);
-  const cardElement = card.generateCard();
-  createCard (cardElement);
+  cards.prepend(createCard (item));
 }
 
 initialCards.forEach((item) =>{
   renderCard(item);
-
 });
 
 validationProfileForm.enableValidation();
