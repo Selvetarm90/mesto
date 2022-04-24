@@ -33,7 +33,7 @@ const validationaddCardForm = new FormValidator(options, cardForm);
 function openPopupReduct(){
   formName.value = profileName.textContent;
   formJob.value = profileAbout.textContent;
-  validationProfileForm.setHideInputError();
+  validationProfileForm.validBeforeOpenForm();
   openPopup(popupProfile);
 }
 
@@ -52,7 +52,7 @@ profileForm.addEventListener('submit', function(evt){
 });
 
 addButton.addEventListener("click", function(){
-  validationaddCardForm.setHideInputError();
+  validationaddCardForm.validBeforeOpenForm();
   openPopup(popupAddItem);
 });
 

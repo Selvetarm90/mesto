@@ -67,7 +67,7 @@ class FormValidator {
       return !input.validity.valid;
     });
   };
-  setHideInputError (){
+  validBeforeOpenForm (){
     this._inputList.forEach((input) =>{
       this._checkInputValidity(input);
     });
