@@ -14,7 +14,6 @@ const imageLink = popupAddItem.querySelector(".form-group__item_el_image-link");
 const popupImage = document.querySelector(".popup_content_image");
 const buttonClosePopupImage = popupImage.querySelector(".popup__button-close");
 const closePopupAddItem = popupAddItem.querySelector(".popup__button-close");
-const template = document.querySelector(".template-item");
 const cards = document.querySelector(".cards");
 const options = {
   buttonSubmit: '.form-group__button-save',
@@ -71,7 +70,7 @@ buttonClosePopupImage.addEventListener("click", function(){
 });
 
 function createCard (item){
-  const card = new Card (item, template);
+  const card = new Card (item, ".template-item");
   const cardElement = card.generateCard();
   return cardElement
 }

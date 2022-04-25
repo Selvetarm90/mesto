@@ -4,11 +4,10 @@ class Card {
     this._name = data.name;
     this._link = data.link;
     this._template = template;
-
   }
 
   _getTemplate(){
-    const item = this._template.content.querySelector(".item").cloneNode(true);
+    const item = document.querySelector(this._template).content.querySelector(".item").cloneNode(true);
     return item;
   }
 
