@@ -1,9 +1,10 @@
 import {openPopup} from "../utils/utils.js"
 class Card {
-  constructor (data, template){
+  constructor (data, template, {handleCardClick}){
     this._name = data.name;
     this._link = data.link;
     this._template = document.querySelector(template);
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate(){
@@ -26,7 +27,7 @@ class Card {
     this._likeButton = this._item.querySelector(".item__like");
     this._delButton.addEventListener("click", () => this._removeItem ());
     this._likeButton.addEventListener("click", () => this._toggleLike());
-    this._cardImage.addEventListener("click", () => this._openPopupImage());
+    this._cardImage.addEventListener("click", () => this._handleCardClick());
   }
 
   _removeItem () {

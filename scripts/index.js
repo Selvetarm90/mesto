@@ -28,6 +28,7 @@ import {FormValidator} from "./components/FormValidator.js";
 
 import Section from "./components/Section.js";
 import Popup from "./components/Popup.js";
+import PopupWithImage from "./components/PopupWithImage.js";
 
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
@@ -35,7 +36,10 @@ const validationaddCardForm = new FormValidator(options, cardForm);
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card(item, ".template-item");
+    const card = new Card(item, ".template-item", {handleCardClick: () => {
+    const popupWithImage = new PopupWithImage(item, '.popup_content_image');
+    popupWithImage.open()}});
+    
     const cardElement = card.generateCard();   
     cardList.addItem(cardElement);
   }
