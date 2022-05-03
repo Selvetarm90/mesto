@@ -1,4 +1,4 @@
-import {openPopup} from "../utils/utils.js"
+//import {openPopup} from "../utils/utils.js"
 class Card {
   constructor (data, template, {handleCardClick}){
     this._name = data.name;
@@ -39,15 +39,15 @@ class Card {
     this._likeButton.classList.toggle("item__like_active");
   };
 
-  _openPopupImage(){
-    const popupImage = document.querySelector(".popup_content_image");
-    const bigSizePicture = popupImage.querySelector(".popup__image");
-    const popupImageHeading = popupImage.querySelector(".popup__heading-image");
-    bigSizePicture.src = this._link;
-    bigSizePicture.alt = this._name;
-    popupImageHeading.textContent = this._name;
-    openPopup(popupImage);
-  }
+ // _openPopupImage(){
+ //   const popupImage = document.querySelector(".popup_content_image");
+ //   const bigSizePicture = popupImage.querySelector(".popup__image");
+ //   const popupImageHeading = popupImage.querySelector(".popup__heading-image");
+ //   bigSizePicture.src = this._link;
+ //   bigSizePicture.alt = this._name;
+ //   popupImageHeading.textContent = this._name;
+ //   openPopup(popupImage);
+ // }
 
 }
 

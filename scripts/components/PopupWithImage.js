@@ -11,7 +11,7 @@ export default class PopupWithImage extends Popup{
     bigSizePicture.src = this._link;
     bigSizePicture.alt = this._name;
     popupImageHeading.textContent = this._name;
-    super.setEventListeners();
-	this._popupSelector.classList.add("popup_opened");
+    super.open();
+	
   }
 }
