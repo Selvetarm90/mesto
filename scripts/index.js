@@ -41,7 +41,7 @@ const cardList = new Section({
     const card = new Card(item, ".template-item", {handleCardClick: () => {
     const popupWithImage = new PopupWithImage(item, '.popup_content_image');
     popupWithImage.open()}});
-    const cardElement = card.generateCard();   
+    const cardElement = card.generateCard();
     cardList.addItem(cardElement);
   }
 }, ".cards");
@@ -52,13 +52,14 @@ function openPopupReduct(){
   //validationProfileForm.validBeforeOpenForm();
   openPopup(popupProfile);
 }
-
+const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about"}
+const userInfo = new UserInfo(profileInfoSelectors);
 reductButton.addEventListener('click', function(){
-  const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: () => {
-    const userInfo = new UserInfo({profileName: ".info__name", profileAbout: ".info__about"})
+  const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
+
    // profileName.textContent = formName.value;
    // profileAbout.textContent = formJob.value;
-    userInfo.setUserInfo();
+    userInfo.setUserInfo(data);
     reductProfilePopup.close();
     console.log("Сабмит ок!");
   }});
@@ -80,7 +81,7 @@ addButton.addEventListener("click", function(){
   const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
     cardList.addNewCard({name: imageTitle.value, link: imageLink.value});
     addCardPopup.close();
-    
+
     console.log("Сабмит-2 ок!");
   }});
   validationaddCardForm.validBeforeOpenForm();

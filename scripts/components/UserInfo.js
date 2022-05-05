@@ -1,15 +1,22 @@
 export default class UserInfo{
-	constructor({nameSelector, aboutSelector}){
-		this._nameSelector = document.querySelector(nameSelector);
-		this._aboutSelector = document.querySelector(aboutSelector)
+	constructor(profileInfoSelectors){
+		this._nameProfile = document.querySelector(profileInfoSelectors.profileName);
+		this._aboutProfile = document.querySelector(profileInfoSelectors.profileAbout);
+    //this._nameInputForm = '.form-group__item_el_name';
+   // this._aboutInputForm = document.querySelector('.form-group__item_el_job')
+
 	}
 
 	getUserInfo(){
 
 	}
 
-	setUserInfo(){
-		
+	setUserInfo(data){
+    this._nameProfile.textContent = data.firstname;
+    this._aboutProfile.textContent = data.job;
+		console.log(data.firstname);
+    console.log(data.job);
+   // console.log(data.this._about.value);
 	}
 
 }
