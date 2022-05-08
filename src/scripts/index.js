@@ -23,7 +23,6 @@ import PopupWithForm from "./components/PopupWithForm.js";
 import UserInfo from "./components/UserInfo.js";
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
-
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {

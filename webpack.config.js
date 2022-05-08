@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/scripts/index.js',
@@ -12,7 +13,8 @@ module.exports = {
       new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html')
     }),
-      new MiniCssExtractPlugin()
+      new MiniCssExtractPlugin(),
+      new CleanWebpackPlugin()
     ],
     mode: 'development',
     module: {
@@ -35,6 +37,12 @@ module.exports = {
         {
           test: /\.(png|svg|jpg|gif|woff(2)?)|eot|ttf|otf/,
           type: 'asset/resource'
+        },
+      
+        {
+          test: /\.js$/,
+          use: 'babel-loader',
+          exclude: /node_modules/
         }
       ]
     },
@@ -42,5 +50,6 @@ module.exports = {
       compress: true,
       port: 8080,
       open: true
-    }
+    },
+    devtool: 'inline-source-map'
 };
