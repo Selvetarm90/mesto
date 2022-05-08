@@ -4,23 +4,26 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
 		this._callbackSubmit = callbackSubmit;
 		this._form = this._popupSelector.querySelector(".form-group");
+
 	}
 	_getInputValues(){
 		this._inputList = Array.from(this._popupSelector.querySelectorAll('.form-group__item'));
-   // this._inputListValues = {};
-   // this._inputListValues = this._inputList.map((input) =>{
-    // return (`{${input.name}: ${input.value}}`);
-  //  });
     this._inputListValues = this._inputList.reduce((result, item) => {
-     // const key = Object.keys(item)[0];
       result[item.name] = item.value;
       return result;
     },{});
-
 		return this._inputListValues;
-
 	}
 
+  open(data){
+    if (data){
+      const inputFirsname = this._form.querySelector('.form-group__item_el_name');
+      const inputJob = this._form.querySelector('.form-group__item_el_job');
+      inputFirsname.value = data.firstname;
+      inputJob.value = data.job;
+    }
+    super.open()
+  }
 
 	setEventListeners(){
     this._listener = (() => this._callbackSubmit(this._getInputValues()));

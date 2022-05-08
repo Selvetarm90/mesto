@@ -1,0 +1,33 @@
+{
+  "name": "mesto",
+  "version": "1.0.0",
+  "description": "## Описание: Приложение с возможностью загрузить фотографию, оценить другие фото. * [Ссылка](https://selvetarm90.github.io/mesto/) на сайт",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Selvetarm90/mesto.git"
+  },
+  "keywords": [],
+  "author": "Aleksey Paramonov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Selvetarm90/mesto/issues"
+  },
+  "homepage": "https://github.com/Selvetarm90/mesto#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "css-loader": "^6.7.1",
+    "cssnano": "^5.1.7",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "postcss": "^8.4.13",
+    "postcss-loader": "^6.2.1",
+    "style-loader": "^3.3.1",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.0"
+  }
+}

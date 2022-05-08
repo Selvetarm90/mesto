@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Место</title>
-    <link rel="stylesheet" href="./pages/index.css">
+  <!--  <link rel="stylesheet" href="./pages/index.css"> -->
   </head>
 
   <body class="body">
     <div class="page">
       <header class="header">
-        <img class="header__logo" src="./images/header-logo.svg" alt="Логотип Место-Россия">
+        <img class="header__logo" src="<%=require("./images/header-logo.svg")%>" alt="Логотип Место-Россия">
       </header>
 
       <main>
         <section class="profile">
-          <img class="profile__avatar" src="./images/avatar.jpg" alt="Аватар">
+          <img class="profile__avatar" src="<%=require("./images/avatar.jpg")%>" alt="Аватар">
           <div class="info">
             <h1 class="info__name">Жак-Ив Кусто</h1>
             <button type="button" aria-label="Редактировать" class="info__button-reduct"></button>
@@ -68,7 +68,7 @@
 
       <div class="popup popup_content_image">
         <div class="popup__container-image">
-          <img class="popup__image" src="./images/gaman-alice-jDkXZ4OX-Us-unsplash.jpg" alt="">
+          <img class="popup__image" src="#" alt="">
           <h3 class="popup__heading-image">Редактировать профиль</h3>
           <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
         </div>
@@ -83,8 +83,8 @@
         <button type="button" aria-label="Удалить" class="item__delete"></button>
       </article>
     </template>
+  <!--
     <script type="module" src="./scripts/utils/initialCards.js"></script>
-    <script type="module" src="./scripts/utils/utils.js"></script>
     <script type="module" src="./scripts/components/FormValidator.js"></script>
     <script type="module" src="./scripts/components/Section.js"></script>
     <script type="module" src="./scripts/components/Popup.js"></script>
@@ -93,5 +93,6 @@
     <script type="module" src="./scripts/components/UserInfo.js"></script>
     <script type="module" src="./scripts/index.js"></script>
     <script type="module" src="./scripts/components/Card.js"></script>
+  -->
   </body>
 </html>
