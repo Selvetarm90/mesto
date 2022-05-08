@@ -1,4 +1,4 @@
-import '../pages/index.css'
+import './index.css'
 
 const popupProfile = document.querySelector(".popup_button_reduct");
 const reductButton = document.querySelector(".info__button-reduct");
@@ -14,21 +14,21 @@ const options = {
   inputErrorClass: 'form-group__item_error',
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
 };
-import {initialCards} from "./utils/initialCards.js";
-import {Card} from "./components/Card.js";
-import {FormValidator} from "./components/FormValidator.js";
-import Section from "./components/Section.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import PopupWithForm from "./components/PopupWithForm.js";
-import UserInfo from "./components/UserInfo.js";
+import {initialCards} from "../scripts/utils/initialCards.js";
+import {Card} from "../scripts/components/Card.js";
+import {FormValidator} from "../scripts/components/FormValidator.js";
+import Section from "../scripts/components/Section.js";
+import PopupWithImage from "../scripts/components/PopupWithImage.js";
+import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import UserInfo from "../scripts/components/UserInfo.js";
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
+const popupWithImage = new PopupWithImage('.popup_content_image');
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {
     const card = new Card(item, ".template-item", {handleCardClick: () => {
-    const popupWithImage = new PopupWithImage(item, '.popup_content_image');
-    popupWithImage.open()}});
+    popupWithImage.open(item)}});
     const cardElement = card.generateCard();
     cardList.addItem(cardElement);
   }
@@ -36,22 +36,20 @@ const cardList = new Section({
 
 const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about"}
 const userInfo = new UserInfo(profileInfoSelectors);
+const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
+  userInfo.setUserInfo(data);
+  reductProfilePopup.close();
+}});
 reductButton.addEventListener('click', function(){
-  const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
-    userInfo.setUserInfo(data);
-    reductProfilePopup.close();
-  }});
-
   validationProfileForm.validBeforeOpenForm();
   reductProfilePopup.open(userInfo.getUserInfo());
 });
 
-
+const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
+  cardList.renderer({name: imageTitle.value, link: imageLink.value});
+  addCardPopup.close();
+}});
 addButton.addEventListener("click", function(){
-  const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
-    cardList.addNewCard({name: imageTitle.value, link: imageLink.value});
-    addCardPopup.close();
-  }});
   validationaddCardForm.validBeforeOpenForm();
   addCardPopup.open();
 });
