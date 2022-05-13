@@ -21,6 +21,16 @@ import Section from "../scripts/components/Section.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
+import Api from '../scripts/components/Api.js';
+
+const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
+  headers: {
+    authorization: '5f54aa7b-f781-4bbd-a84a-c9d65d5c54ef',
+    'Content-Type': 'application/json'
+  } 
+});
+console.log(api.getInitialCards());
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
 const popupWithImage = new PopupWithImage('.popup_content_image');
