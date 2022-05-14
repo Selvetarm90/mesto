@@ -16,7 +16,7 @@
         <section class="profile">
           <img class="profile__avatar" src="<%=require("./images/avatar.jpg")%>" alt="Аватар">
           <div class="info">
-            <h1 class="info__name">Жак-Ив Кусто</h1>
+            <h1 class="info__name">Жак-Ив </h1>
             <button type="button" aria-label="Редактировать" class="info__button-reduct"></button>
             <p class="info__about">Исследователь океана</p>
           </div>
@@ -36,10 +36,10 @@
           <h3 class="popup__heading">Редактировать профиль</h3>
           <form class="form-group" name="dateForm" novalidate>
 
-            <input type="text" id="firstname" class="form-group__item form-group__item_el_name" name="firstname" minlength="2" maxlength="40" required>
+            <input type="text" id="firstname" class="form-group__item form-group__item_el_name" name="name" minlength="2" maxlength="40" required>
             <span id="firstname-error" class="error"></span>
 
-            <input type="text" id="job" class="form-group__item form-group__item_el_job" name="job" minlength="2" maxlength="200" required>
+            <input type="text" id="job" class="form-group__item form-group__item_el_job" name="about" minlength="2" maxlength="200" required>
             <span id="job-error" class="error"></span>
 
             <button name="saved-form" type="submit" class="form-group__button-save">Сохранить</button>

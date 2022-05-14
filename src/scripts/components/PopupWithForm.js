@@ -19,8 +19,9 @@ export default class PopupWithForm extends Popup{
     if (data){
       const inputFirsname = this._form.querySelector('.form-group__item_el_name');
       const inputJob = this._form.querySelector('.form-group__item_el_job');
-      inputFirsname.value = data.firstname;
-      inputJob.value = data.job;
+      console.log(data)
+      inputFirsname.value = data.name;
+      inputJob.value = data.about;
     }
     super.open()
   }

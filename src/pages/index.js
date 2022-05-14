@@ -14,7 +14,7 @@ const options = {
   inputErrorClass: 'form-group__item_error',
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
 };
-import {initialCards} from "../scripts/utils/initialCards.js";
+//import {initialCards} from "../scripts/utils/initialCards.js";
 import {Card} from "../scripts/components/Card.js";
 import {FormValidator} from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
@@ -28,32 +28,54 @@ const api = new Api({
   headers: {
     authorization: '5f54aa7b-f781-4bbd-a84a-c9d65d5c54ef',
     'Content-Type': 'application/json'
-  } 
+  }
 });
-console.log(api.getInitialCards());
+api.getInitialCards()
+.then((initialCards) => {
+  const cardList = new Section({
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, ".template-item", {handleCardClick: () => {
+      popupWithImage.open(item)}});
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+
+    }
+  }, ".cards");
+  cardList.renderItems();
+})
+.catch((err) => console.log(err));
+
+api.getUserInfo()
+.then((savedUserInfo) =>{
+  userInfo.setUserInfo(savedUserInfo);
+  reductButton.addEventListener('click', function(){
+    validationProfileForm.validBeforeOpenForm();
+    reductProfilePopup.open(savedUserInfo);
+  });
+})
+.catch((err) => console.log(err));
+
+
+
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
 const popupWithImage = new PopupWithImage('.popup_content_image');
-const cardList = new Section({
-  data: initialCards,
-  renderer: (item) => {
-    const card = new Card(item, ".template-item", {handleCardClick: () => {
-    popupWithImage.open(item)}});
-    const cardElement = card.generateCard();
-    cardList.addItem(cardElement);
-  }
-}, ".cards");
 
-const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about"}
+const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about", profileAvatar: ".profile__avatar"}
 const userInfo = new UserInfo(profileInfoSelectors);
 const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
-  userInfo.setUserInfo(data);
+ // userInfo.setUserInfo(data);
+  api.changeUserInfo(data)
+.then((userData) =>{
+  console.log(userData)
+  userInfo.setUserInfo(userData);
+})
+ // console.log(data)
   reductProfilePopup.close();
 }});
-reductButton.addEventListener('click', function(){
-  validationProfileForm.validBeforeOpenForm();
-  reductProfilePopup.open(userInfo.getUserInfo());
-});
+
+
 
 const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
   cardList.renderer({name: imageTitle.value, link: imageLink.value});
@@ -64,6 +86,6 @@ addButton.addEventListener("click", function(){
   addCardPopup.open();
 });
 
-cardList.renderItems();
+
 validationProfileForm.enableValidation();
 validationaddCardForm.enableValidation();
