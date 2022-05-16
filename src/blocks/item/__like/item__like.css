@@ -2,6 +2,10 @@
   background-image: url(../../../images/like.svg);
   border: 0;
   background-color: transparent;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-self: center;
   padding: 0;
   margin-right: 20px;
   width: 22px;

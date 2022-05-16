@@ -19,6 +19,7 @@
 @import url(../blocks/item/__picture/item__picture.css);
 @import url(../blocks/item/__title/item__title.css);
 @import url(../blocks/item/__like/item__like.css);
+@import url(../blocks/item/__like-count/item__like-count.css);
 @import url(../blocks/item/__like/_active/item__like_ative.css);
 @import url(../blocks/item/__delete/item__delete.css);
 

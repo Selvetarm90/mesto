@@ -14,7 +14,7 @@
 
       <main>
         <section class="profile">
-          <img class="profile__avatar" src="<%=require("./images/avatar.jpg")%>" alt="Аватар">
+          <img class="profile__avatar" src="#" alt="Аватар">
           <div class="info">
             <h1 class="info__name">Жак-Ив </h1>
             <button type="button" aria-label="Редактировать" class="info__button-reduct"></button>
@@ -78,7 +78,9 @@
       <article class="item">
         <img class="item__picture" src="#" alt="">
         <h2 class="item__title">Челябинск</h2>
-        <button type="button" aria-label="Оценить" class="item__like"></button>
+        <button type="button" aria-label="Оценить" class="item__like">
+          <p class="item__like-count">0</p>
+        </button>
         <button type="button" aria-label="Удалить" class="item__delete"></button>
       </article>
     </template>

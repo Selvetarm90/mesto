@@ -30,21 +30,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-api.getInitialCards()
-.then((initialCards) => {
-  const cardList = new Section({
-    data: initialCards,
-    renderer: (item) => {
-      const card = new Card(item, ".template-item", {handleCardClick: () => {
-      popupWithImage.open(item)}});
-      const cardElement = card.generateCard();
-      cardList.addItem(cardElement);
-
-    }
-  }, ".cards");
-  cardList.renderItems();
-})
-.catch((err) => console.log(err));
 
 api.getUserInfo()
 .then((savedUserInfo) =>{
@@ -56,7 +41,34 @@ api.getUserInfo()
 })
 .catch((err) => console.log(err));
 
+api.getInitialCards()
+.then((initialCards) => {
+  const cardList = new Section({
+    data: initialCards,
+    renderer: (item) => {
+      const card = new Card(item, ".template-item", {handleCardClick: () => {
+      popupWithImage.open(item)}});
+      const cardElement = card.generateCard();
+      cardList.addItem(cardElement);
+    }
+  }, ".cards");
+  cardList.renderItems();
 
+  const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
+    api.addCard({name: imageTitle.value, link: imageLink.value})
+    .then((card) =>{
+      cardList.renderer({name: card.name, link: card.link});
+      addCardPopup.close();
+    })
+  }});
+
+  addButton.addEventListener("click", function(){
+    validationaddCardForm.validBeforeOpenForm();
+    addCardPopup.open();
+  });
+
+})
+.catch((err) => console.log(err));
 
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
@@ -65,26 +77,15 @@ const popupWithImage = new PopupWithImage('.popup_content_image');
 const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about", profileAvatar: ".profile__avatar"}
 const userInfo = new UserInfo(profileInfoSelectors);
 const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
- // userInfo.setUserInfo(data);
   api.changeUserInfo(data)
-.then((userData) =>{
-  console.log(userData)
-  userInfo.setUserInfo(userData);
-})
- // console.log(data)
+    .then((userData) =>{
+     console.log(userData)
+     userInfo.setUserInfo(userData);
+    }).catch((err) => console.log(err));
   reductProfilePopup.close();
 }});
 
 
-
-const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
-  cardList.renderer({name: imageTitle.value, link: imageLink.value});
-  addCardPopup.close();
-}});
-addButton.addEventListener("click", function(){
-  validationaddCardForm.validBeforeOpenForm();
-  addCardPopup.open();
-});
 
 
 validationProfileForm.enableValidation();

@@ -23,8 +23,7 @@ export default class Api {
     return fetch(this._baseUrl + '/users/me',{
       method: 'GET',
       headers: this._headers
-    })
-    .then(res => this._errorHandler(res))
+    }).then(res => this._errorHandler(res))
   }
 
   changeUserInfo(data){
@@ -32,7 +31,14 @@ export default class Api {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify(data)
-    })
-    .then(res => this._errorHandler(res));
+    }).then(res => this._errorHandler(res));
+  }
+
+  addCard(data){
+    return fetch(this._baseUrl + '/cards',{
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then(res => this._errorHandler(res));
   }
 }
