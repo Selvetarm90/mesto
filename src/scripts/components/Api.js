@@ -41,4 +41,9 @@ export default class Api {
       body: JSON.stringify(data)
     }).then(res => this._errorHandler(res));
   }
+  delCard(id){
+    return fetch(this._baseUrl + '/cards/' + id, {
+      method: 'DELETE'
+    })
+  }
 }

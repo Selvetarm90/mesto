@@ -8,6 +8,7 @@ export default class PopupWithForm extends Popup{
 	}
 	_getInputValues(){
 		this._inputList = Array.from(this._popupElement.querySelectorAll('.form-group__item'));
+
     this._inputListValues = this._inputList.reduce((result, item) => {
       result[item.name] = item.value;
       return result;
@@ -19,7 +20,7 @@ export default class PopupWithForm extends Popup{
     if (data){
       const inputFirsname = this._form.querySelector('.form-group__item_el_name');
       const inputJob = this._form.querySelector('.form-group__item_el_job');
-      console.log(data)
+      //console.log('popup' + data.name)
       inputFirsname.value = data.name;
       inputJob.value = data.about;
     }

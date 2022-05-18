@@ -22,7 +22,6 @@ import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from '../scripts/components/Api.js';
-
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
   headers: {
@@ -30,6 +29,18 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
+const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about", profileAvatar: ".profile__avatar"}
+const userInfo = new UserInfo(profileInfoSelectors);
+const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
+  api.changeUserInfo(data)
+    .then((userData) =>{
+     console.log(userData)
+     userInfo.setUserInfo(userData);
+    })
+    .catch((err) => console.log(err));
+  reductProfilePopup.close();
+}});
 
 api.getUserInfo()
 .then((savedUserInfo) =>{
@@ -41,13 +52,23 @@ api.getUserInfo()
 })
 .catch((err) => console.log(err));
 
+const confirmDelCard = new PopupWithForm(".popup_button_confirm-del", {callbackSubmit: () =>{
+  api.delCard(id)
+}});
+
 api.getInitialCards()
 .then((initialCards) => {
   const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item, ".template-item", {handleCardClick: () => {
-      popupWithImage.open(item)}});
+      const card = new Card(item, ".template-item", {
+      handleCardClick: () => {
+        popupWithImage.open(item)},
+      handleDelIconClick: () => {
+        confirmDelCard.open();
+      },
+
+    });
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
@@ -74,16 +95,7 @@ const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
 const popupWithImage = new PopupWithImage('.popup_content_image');
 
-const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about", profileAvatar: ".profile__avatar"}
-const userInfo = new UserInfo(profileInfoSelectors);
-const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
-  api.changeUserInfo(data)
-    .then((userData) =>{
-     console.log(userData)
-     userInfo.setUserInfo(userData);
-    }).catch((err) => console.log(err));
-  reductProfilePopup.close();
-}});
+
 
 
 
