@@ -20,6 +20,7 @@ import {FormValidator} from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
 import PopupWithImage from "../scripts/components/PopupWithImage.js";
 import PopupWithForm from "../scripts/components/PopupWithForm.js";
+import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js';
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from '../scripts/components/Api.js';
 const api = new Api({
@@ -29,6 +30,9 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+const validationProfileForm = new FormValidator(options, profileForm);
+const validationaddCardForm = new FormValidator(options, cardForm);
+const popupWithImage = new PopupWithImage('.popup_content_image');
 
 const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about", profileAvatar: ".profile__avatar"}
 const userInfo = new UserInfo(profileInfoSelectors);
@@ -42,30 +46,19 @@ const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSu
   reductProfilePopup.close();
 }});
 
-api.getUserInfo()
-.then((savedUserInfo) =>{
-  userInfo.setUserInfo(savedUserInfo);
-  reductButton.addEventListener('click', function(){
-    validationProfileForm.validBeforeOpenForm();
-    reductProfilePopup.open(savedUserInfo);
-  });
-})
-.catch((err) => console.log(err));
 
-const confirmDelCard = new PopupWithForm(".popup_button_confirm-del", {callbackSubmit: () =>{
-  api.delCard(id)
-}});
 
-api.getInitialCards()
-.then((initialCards) => {
+api.getAllData()
+.then((allData) => {
+  const [initialCards, savedUserInfo] = allData;
   const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
       const card = new Card(item, ".template-item", {
       handleCardClick: () => {
         popupWithImage.open(item)},
-      handleDelIconClick: () => {
-        confirmDelCard.open();
+      handleDelIconClick: (cardId) => {
+        confirmDelCard.open(cardId);
       },
 
     });
@@ -74,6 +67,18 @@ api.getInitialCards()
     }
   }, ".cards");
   cardList.renderItems();
+  userInfo.setUserInfo(savedUserInfo);
+  reductButton.addEventListener('click', function(){
+    validationProfileForm.validBeforeOpenForm();
+    reductProfilePopup.open(userInfo.getUserInfo());
+  });
+
+  const confirmDelCard = new PopupWithConfirm(".popup_button_confirm-del", {callbackSubmit: (cardId) =>{
+    console.log(cardId);
+    api.delCard(cardId)
+    .then((data) => console.log(data))
+    .catch((err) => console.log(err));
+  }});
 
   const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
     api.addCard({name: imageTitle.value, link: imageLink.value})
@@ -88,17 +93,17 @@ api.getInitialCards()
     addCardPopup.open();
   });
 
+  validationProfileForm.enableValidation();
+  validationaddCardForm.enableValidation();
+
 })
 .catch((err) => console.log(err));
 
-const validationProfileForm = new FormValidator(options, profileForm);
-const validationaddCardForm = new FormValidator(options, cardForm);
-const popupWithImage = new PopupWithImage('.popup_content_image');
 
 
 
 
 
 
-validationProfileForm.enableValidation();
-validationaddCardForm.enableValidation();
+
+

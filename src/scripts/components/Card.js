@@ -8,7 +8,8 @@ class Card {
     this._delButton = this._item.querySelector(".item__delete");
     this._handleCardClick = handleCardClick;
     this._handleDelIconClick = handleDelIconClick;
-    this._ownerId = data.owner._id
+    this._ownerId = data.owner ?  data.owner._id : {};
+    this.cardId = data._id;
   }
 
   _getTemplate(){
@@ -38,7 +39,7 @@ class Card {
   _setEventListeners(){
 
     this._likeButton = this._item.querySelector(".item__like");
-    this._delButton.addEventListener("click", () => this._handleDelIconClick());
+    this._delButton.addEventListener("click", () => this._handleDelIconClick(this.cardId));
     this._likeButton.addEventListener("click", () => this._toggleLike());
     this._cardImage.addEventListener("click", () => this._handleCardClick());
   }

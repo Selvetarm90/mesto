@@ -26,6 +26,10 @@ export default class Api {
     }).then(res => this._errorHandler(res))
   }
 
+  getAllData(){
+	  return Promise.all([this.getInitialCards(), this.getUserInfo()])
+  }
+
   changeUserInfo(data){
     return fetch(this._baseUrl + '/users/me',{
       method: 'PATCH',
@@ -41,9 +45,11 @@ export default class Api {
       body: JSON.stringify(data)
     }).then(res => this._errorHandler(res));
   }
+
   delCard(id){
     return fetch(this._baseUrl + '/cards/' + id, {
-      method: 'DELETE'
+      method: 'DELETE',
+			headers: this._headers
     })
   }
 }
