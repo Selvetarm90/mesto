@@ -8,7 +8,8 @@ class Card {
     this._delButton = this._item.querySelector(".item__delete");
     this._handleCardClick = handleCardClick;
     this._handleDelIconClick = handleDelIconClick;
-    this._ownerId = data.owner ?  data.owner._id : {};
+    this.myId = 'ba5461e5c9bdc77d58f9a499'
+    this._ownerId = data.owner ?  data.owner._id : this.myId;
     this.cardId = data._id;
   }
 
@@ -22,7 +23,8 @@ class Card {
   }
 
   generateCard(){
-    if (this._ownerId !== 'ba5461e5c9bdc77d58f9a499'){
+    console.log(this._ownerId)
+    if (this._ownerId !== this.myId){
       this._delButtonTrash();
     }
     this._cardImage = this._item.querySelector(".item__picture");
@@ -39,7 +41,7 @@ class Card {
   _setEventListeners(){
 
     this._likeButton = this._item.querySelector(".item__like");
-    this._delButton.addEventListener("click", () => this._handleDelIconClick(this.cardId));
+    this._delButton.addEventListener("click",  () => this._handleDelIconClick({id: this.cardId, removeItem: () =>this._removeItem()}));
     this._likeButton.addEventListener("click", () => this._toggleLike());
     this._cardImage.addEventListener("click", () => this._handleCardClick());
   }

@@ -7,15 +7,15 @@ export default class PopupWithConfirm extends Popup{
 		this._form = this._popupElement.querySelector(".form-group");
 	}
 
-	open(id){
-		this._id = id;
+	open(data){
+		this._data = data;
 		super.open();
 	}
 
 	setEventListeners(){
     this._listener = ((evt) => {
 			evt.preventDefault()
-			this._callbackSubmit(this._id)});
+			this._callbackSubmit(this._data)});
 		this._form.addEventListener('submit', this._listener);
 		super.setEventListeners();
 	}

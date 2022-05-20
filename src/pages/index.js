@@ -51,17 +51,18 @@ const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSu
 api.getAllData()
 .then((allData) => {
   const [initialCards, savedUserInfo] = allData;
+  initialCards.reverse()
   const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
       const card = new Card(item, ".template-item", {
       handleCardClick: () => {
         popupWithImage.open(item)},
-      handleDelIconClick: (cardId) => {
-        confirmDelCard.open(cardId);
+      handleDelIconClick: (data) => {
+        confirmDelCard.open(data);
       },
-
     });
+
       const cardElement = card.generateCard();
       cardList.addItem(cardElement);
     }
@@ -73,10 +74,13 @@ api.getAllData()
     reductProfilePopup.open(userInfo.getUserInfo());
   });
 
-  const confirmDelCard = new PopupWithConfirm(".popup_button_confirm-del", {callbackSubmit: (cardId) =>{
-    console.log(cardId);
-    api.delCard(cardId)
-    .then((data) => console.log(data))
+  const confirmDelCard = new PopupWithConfirm(".popup_button_confirm-del", {callbackSubmit: (callbackData) =>{
+    console.log(callbackData);
+    api.delCard(callbackData.id)
+    .then((data) => {
+      callbackData.removeItem();
+      confirmDelCard.close()
+      console.log("удаленная карточка" + data)})
     .catch((err) => console.log(err));
   }});
 
