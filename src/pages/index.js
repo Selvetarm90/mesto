@@ -1,5 +1,4 @@
 import './index.css'
-
 const popupProfile = document.querySelector(".popup_button_reduct");
 const reductButton = document.querySelector(".info__button-reduct");
 const profileForm = popupProfile.querySelector(".form-group");
@@ -14,7 +13,6 @@ const options = {
   inputErrorClass: 'form-group__item_error',
   buttonSubmitInactiveClass: 'form-group__button-save_inactive'
 };
-//import {initialCards} from "../scripts/utils/initialCards.js";
 import {Card} from "../scripts/components/Card.js";
 import {FormValidator} from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
@@ -23,6 +21,7 @@ import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithConfirm from '../scripts/components/PopupWithConfirm.js';
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from '../scripts/components/Api.js';
+
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-41',
   headers: {
@@ -30,12 +29,13 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
 const validationProfileForm = new FormValidator(options, profileForm);
 const validationaddCardForm = new FormValidator(options, cardForm);
 const popupWithImage = new PopupWithImage('.popup_content_image');
-
 const profileInfoSelectors = {profileName: ".info__name", profileAbout: ".info__about", profileAvatar: ".profile__avatar"}
 const userInfo = new UserInfo(profileInfoSelectors);
+
 const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSubmit: (data) => {
   api.changeUserInfo(data)
     .then((userData) =>{
@@ -45,8 +45,6 @@ const reductProfilePopup = new PopupWithForm(".popup_button_reduct", {callbackSu
     .catch((err) => console.log(err));
   reductProfilePopup.close();
 }});
-
-
 
 api.getAllData()
 .then((allData) => {
@@ -62,12 +60,22 @@ api.getAllData()
       handleDelIconClick: (data) => {
         confirmDelCard.open(data);
       },
-      handleLikeClick: (likes) => {
-        console.log(likes)
-      const likesId =  likes.map((elem)=>  elem._id);
+      handleLikeClick: (card) => {
+        console.log(card.likes)
+      const likesId =  card.likes.map((elem)=>  elem._id);
       console.log(likesId)
-      console.log(likesId.includes('04daead1f8a3ab9eac0e008e'))
-      
+      if(likesId.includes(savedUserInfo._id)){
+        api.delLike(card._id)
+        .then((card) =>{
+          console.log(card.likes)
+        }).catch((err) => console.log(err));
+      }
+      else{
+        api.addLike(card._id)
+        .then((card) =>{
+          console.log(card.likes)
+        }).catch((err) => console.log(err));
+      }
       }
     });
 
@@ -75,8 +83,10 @@ api.getAllData()
       cardList.addItem(cardElement);
     }
   }, ".cards");
+
   cardList.renderItems();
   userInfo.setUserInfo(savedUserInfo);
+
   reductButton.addEventListener('click', function(){
     validationProfileForm.validBeforeOpenForm();
     reductProfilePopup.open(userInfo.getUserInfo());
@@ -95,7 +105,7 @@ api.getAllData()
   const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
     api.addCard({name: imageTitle.value, link: imageLink.value})
     .then((card) =>{
-      cardList.renderer({name: card.name, link: card.link, _id: card._id});
+      cardList.renderer(card);
       addCardPopup.close();
     })
   }});
@@ -107,15 +117,5 @@ api.getAllData()
 
   validationProfileForm.enableValidation();
   validationaddCardForm.enableValidation();
-
 })
 .catch((err) => console.log(err));
-
-
-
-
-
-
-
-
-
