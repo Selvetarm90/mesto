@@ -55,12 +55,20 @@ api.getAllData()
   const cardList = new Section({
     data: initialCards,
     renderer: (item) => {
-      const card = new Card(item, ".template-item", {
+      const card = new Card(item, savedUserInfo._id, ".template-item", {
       handleCardClick: () => {
-        popupWithImage.open(item)},
+        popupWithImage.open(item)
+      },
       handleDelIconClick: (data) => {
         confirmDelCard.open(data);
       },
+      handleLikeClick: (likes) => {
+        console.log(likes)
+      const likesId =  likes.map((elem)=>  elem._id);
+      console.log(likesId)
+      console.log(likesId.includes('04daead1f8a3ab9eac0e008e'))
+      
+      }
     });
 
       const cardElement = card.generateCard();
@@ -87,7 +95,7 @@ api.getAllData()
   const addCardPopup = new PopupWithForm(".popup_button_add-item", {callbackSubmit: () => {
     api.addCard({name: imageTitle.value, link: imageLink.value})
     .then((card) =>{
-      cardList.renderer({name: card.name, link: card.link});
+      cardList.renderer({name: card.name, link: card.link, _id: card._id});
       addCardPopup.close();
     })
   }});
