@@ -19,12 +19,13 @@
   "bugs": {
     "url": "https://github.com/Selvetarm90/mesto/issues"
   },
-
   "homepage": "https://github.com/Selvetarm90/mesto#readme",
   "devDependencies": {
+    "@babel/core": "^7.18.0",
     "@babel/plugin-transform-runtime": "^7.17.12",
-    "@babel/preset-env": "^7.17.10",
+    "@babel/preset-env": "^7.18.0",
     "autoprefixer": "^10.4.7",
+    "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
     "cssnano": "^5.1.7",
@@ -38,10 +39,8 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
-    "@babel/core": "^7.17.10",
     "babel": "^6.23.0",
-    "babel-loader": "^8.2.5",
-    "core-js": "^3.22.4",
+    "core-js": "^3.22.5",
     "loader": "^2.1.1",
     "webpack": "^5.72.0"
   }

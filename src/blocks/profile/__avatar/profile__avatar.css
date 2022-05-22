@@ -1,7 +1,33 @@
 .profile__avatar{
+  position: relative;
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.profile__avatar::before{
+  position: absolute;
+  content: '';
+  display: block;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color:  rgba(0, 0, 0, 0);
+  transition: .3s;
+}
+
+.profile__avatar:hover:before{
+  transition-property: background-color;
+  transition-duration: .3s;
+  background-color: rgba(0, 0, 0, .8);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-size: 26px;
+  background-image: url('../../../images/redact-ava.svg');
+  cursor: pointer;
 }

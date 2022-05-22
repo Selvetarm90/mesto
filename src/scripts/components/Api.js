@@ -11,6 +11,7 @@ export default class Api {
         }
         return Promise.reject(`Ошибка: ${res.status}`);
   }
+
 	getInitialCards(){
 	return	fetch(this._baseUrl + '/cards',{
 			method: 'GET',
@@ -53,17 +54,25 @@ export default class Api {
     }).then(res => this._errorHandler(res));
   }
 
-	addLike(id){
-		return fetch(this._baseUrl + '/cards/' + id + '/likes', {
-      method: 'PUT',
-			headers: this._headers
-    }).then(res => this._errorHandler(res));
-	}
-
-	delLike(id){
-		return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+	toggleLike(id, status){
+    if (!status){
+		  return fetch(this._baseUrl + '/cards/' + id + '/likes', {
+       method: 'PUT',
+		  	headers: this._headers
+     }).then(res => this._errorHandler(res));
+    }
+    return fetch(this._baseUrl + '/cards/' + id + '/likes', {
       method: 'DELETE',
 			headers: this._headers
     }).then(res => this._errorHandler(res));
 	}
+
+  changeAvatar(data){
+    return fetch(this._baseUrl + '/users/me/avatar',{
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    }).then(res => this._errorHandler(res));
+  }
+
 }

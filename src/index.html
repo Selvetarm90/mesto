@@ -14,7 +14,9 @@
 
       <main>
         <section class="profile">
-          <img class="profile__avatar" src="#" alt="Аватар">
+
+            <div class="profile__avatar"></div>
+
           <div class="info">
             <h1 class="info__name">Жак-Ив </h1>
             <button type="button" aria-label="Редактировать" class="info__button-reduct"></button>
@@ -43,6 +45,18 @@
             <span id="job-error" class="error"></span>
 
             <button name="saved-form" type="submit" class="form-group__button-save">Сохранить</button>
+          </form>
+          <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
+        </div>
+      </div>
+
+      <div class="popup popup_button_change-avatar">
+        <div class="popup__container">
+          <h3 class="popup__heading">Обновить аватар</h3>
+          <form class="form-group" name="date-form-add" novalidate>
+            <input type="url" class="form-group__item form-group__item_el_image-link" id="image-link" name="avatar" placeholder="Ссылка на аватар" required>
+            <span id="image-link-error" class="error"></span>
+            <button name="saved-form" type="submit" class="form-group__button-save form-group__button-save_inactive" disabled>Сохранить</button>
           </form>
           <button type="button" aria-label="Закрыть" class="popup__button-close"></button>
         </div>

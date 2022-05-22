@@ -4,11 +4,11 @@ export default class PopupWithForm extends Popup{
     super(popupSelector);
 		this._callbackSubmit = callbackSubmit;
 		this._form = this._popupElement.querySelector(".form-group");
-
+    this._buttonSubmit = this._form.querySelector(".form-group__button-save");
 	}
+
 	_getInputValues(){
 		this._inputList = Array.from(this._popupElement.querySelectorAll('.form-group__item'));
-
     this._inputListValues = this._inputList.reduce((result, item) => {
       result[item.name] = item.value;
       return result;
@@ -20,7 +20,6 @@ export default class PopupWithForm extends Popup{
     if (data){
       const inputFirsname = this._form.querySelector('.form-group__item_el_name');
       const inputJob = this._form.querySelector('.form-group__item_el_job');
-      //console.log('popup' + data.name)
       inputFirsname.value = data.name;
       inputJob.value = data.about;
     }
@@ -28,7 +27,8 @@ export default class PopupWithForm extends Popup{
   }
 
 	setEventListeners(){
-    this._listener = (() => this._callbackSubmit(this._getInputValues()));
+    this._listener = (() => {
+      this._callbackSubmit({data: this._getInputValues(), button: this._buttonSubmit})});
 		this._form.addEventListener('submit', this._listener);
 		super.setEventListeners();
 	}

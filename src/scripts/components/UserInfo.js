@@ -8,15 +8,15 @@ export default class UserInfo{
 	getUserInfo(){
     return {
       name: this._nameProfile.textContent,
-      about: this._aboutProfile.textContent
+      about: this._aboutProfile.textContent,
+      avatar: this._profileAvatar
     }
 	}
 
 	setUserInfo(data){
-    console.log(data);
     this._nameProfile.textContent = data.name;
     this._aboutProfile.textContent = data.about;
-    this._profileAvatar.src = data.avatar;
+    this._profileAvatar.style.backgroundImage = 'url('+ data.avatar +')';
 	}
 
 }
