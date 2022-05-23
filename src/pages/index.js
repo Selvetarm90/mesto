@@ -1,20 +1,4 @@
 import "./index.css";
-const popupProfile = document.querySelector(".popup_button_reduct");
-const reductButton = document.querySelector(".info__button-reduct");
-const profileForm = popupProfile.querySelector(".form-group");
-const inputFirsname = profileForm.querySelector(".form-group__item_el_name");
-const inputJob = profileForm.querySelector(".form-group__item_el_job");
-const buttonAddCard = document.querySelector(".profile__add-button");
-const popupAddItem = document.querySelector(".popup_button_add-item");
-const cardForm = popupAddItem.querySelector(".form-group");
-const avatarPopup = document.querySelector(".popup_button_change-avatar");
-const avatarForm = avatarPopup.querySelector(".form-group");
-const options = {
-  buttonSubmit: ".form-group__button-save",
-  inputClass: ".form-group__item",
-  inputErrorClass: "form-group__item_error",
-  buttonSubmitInactiveClass: "form-group__button-save_inactive",
-};
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import Section from "../scripts/components/Section.js";
@@ -23,7 +7,16 @@ import PopupWithForm from "../scripts/components/PopupWithForm.js";
 import PopupWithConfirm from "../scripts/components/PopupWithConfirm.js";
 import UserInfo from "../scripts/components/UserInfo.js";
 import Api from "../scripts/components/Api.js";
-
+import {
+  reductButton,
+  profileForm,
+  inputFirsname,
+  inputJob,
+  buttonAddCard,
+  cardForm,
+  avatarForm,
+  options,
+} from "../scripts/utils/utils.js";
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-41",
   headers: {
