@@ -71,7 +71,7 @@ class Card {
   }
 
   updateData(data) {
-    this._data = data;
+    this._data.likes = data.likes;
   }
 
   toggleLike() {
