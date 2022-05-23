@@ -4,7 +4,7 @@
   "description": "## Описание: Приложение с возможностью загрузить фотографию, оценить другие фото. * [Ссылка](https://selvetarm90.github.io/mesto/) на сайт",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
+    "build": "rimraf dist && webpack --mode production",
     "dev": "webpack serve",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
@@ -36,12 +36,12 @@
     "postcss-loader": "^6.2.1",
     "style-loader": "^3.3.1",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.9.0"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^4.9.0",
     "babel": "^6.23.0",
-    "core-js": "^3.22.5",
     "loader": "^2.1.1",
     "webpack": "^5.72.0"
+  },
+  "dependencies": {
+    "core-js": "^3.22.5"
   }
 }
