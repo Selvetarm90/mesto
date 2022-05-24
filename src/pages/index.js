@@ -16,6 +16,7 @@ import {
   cardForm,
   avatarForm,
   options,
+  avatarButton,
 } from "../scripts/utils/utils.js";
 const api = new Api({
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-41",
@@ -69,13 +70,12 @@ const createCard = (item) => {
         .catch((err) => console.log(err));
     },
   });
-  const cardElement = card.generateCard();
-  cardList.addItem(cardElement);
+  return card.generateCard();
 };
 const cardList = new Section(
   {
     renderer: (item) => {
-      createCard(item);
+      cardList.addItem(createCard(item));
     },
   },
   ".cards"
@@ -92,9 +92,9 @@ api
 
 reductButton.addEventListener("click", function () {
   validationProfileForm.validBeforeOpenForm();
-  const dataForInputs = userInfo.getUserInfo();
-  inputFirsname.value = dataForInputs.name;
-  inputJob.value = dataForInputs.about;
+  const { name, about } = userInfo.getUserInfo();
+  inputFirsname.value = name;
+  inputJob.value = about;
   reductProfilePopup.open();
 });
 
@@ -112,8 +112,7 @@ const changeAvatarPopup = new PopupWithForm(".popup_button_change-avatar", {
   },
 });
 
-const avatar = userInfo.getUserInfo().avatar;
-avatar.addEventListener("click", () => {
+avatarButton.addEventListener("click", () => {
   validationChangeAvatarForm.validBeforeOpenForm();
   changeAvatarPopup.open();
 });
@@ -133,15 +132,15 @@ const confirmDelCard = new PopupWithConfirm(".popup_button_confirm-del", {
 });
 
 const addCardPopup = new PopupWithForm(".popup_button_add-item", {
-  callbackSubmit: (data) => {
-    data.button.textContent = "Сохранение...";
+  callbackSubmit: ({ data, button }) => {
+    button.textContent = "Сохранение...";
     api
-      .addCard({ name: data.data.title, link: data.data.link })
+      .addCard({ name: data.title, link: data.link })
       .then((card) => {
-        createCard(card);
+        cardList.addItem(createCard(card));
         addCardPopup.close();
       })
-      .finally(() => (data.button.textContent = "Создать"))
+      .finally(() => (button.textContent = "Создать"))
       .catch((err) => console.log(err));
   },
 });

@@ -7,6 +7,7 @@ const buttonAddCard = document.querySelector(".profile__add-button");
 const popupAddItem = document.querySelector(".popup_button_add-item");
 const cardForm = popupAddItem.querySelector(".form-group");
 const avatarPopup = document.querySelector(".popup_button_change-avatar");
+const avatarButton = document.querySelector(".profile__avatar")
 const avatarForm = avatarPopup.querySelector(".form-group");
 const options = {
   buttonSubmit: ".form-group__button-save",
@@ -23,5 +24,6 @@ export {
   buttonAddCard,
   cardForm,
   avatarForm,
-  options
+  options,
+  avatarButton
 };

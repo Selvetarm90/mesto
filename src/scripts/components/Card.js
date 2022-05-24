@@ -1,12 +1,9 @@
 class Card {
-  constructor(data, id, template, { handleCardClick, handleDelIconClick, handleLikeClick }) {
+  constructor(data, id, templateSelector, { handleCardClick, handleDelIconClick, handleLikeClick }) {
     this._data = data;
     this._name = data.name;
     this._link = data.link;
-    this._template = document.querySelector(template);
-    this._item = this._getTemplate();
-    this._delButton = this._item.querySelector(".item__delete");
-    this._likeButton = this._item.querySelector(".item__like");
+    this._templateSelector = templateSelector
     this._handleCardClick = handleCardClick;
     this._handleDelIconClick = handleDelIconClick;
     this._handleLikeClick = handleLikeClick;
@@ -24,6 +21,10 @@ class Card {
   }
 
   generateCard() {
+    this._template = document.querySelector(this._templateSelector);
+    this._item = this._getTemplate();
+    this._delButton = this._item.querySelector(".item__delete");
+    this._likeButton = this._item.querySelector(".item__like");
     if (this._ownerId !== this._myId) {
       this._removeButtonTrash();
     }
